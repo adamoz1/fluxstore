@@ -38,7 +38,7 @@ class Signin extends StatelessWidget {
       const Padding(
         padding: EdgeInsets.only(bottom: 15),
         child: Text(
-          "Create",
+          "Log into",
           style: TextStyle(fontSize: 28, fontWeight: FontWeight.w500),
         ),
       ),
