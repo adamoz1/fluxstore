@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluxstore/constants.dart';
-import 'package:flutter/foundation.dart';
+import 'package:fluxstore/screens/signup.dart';
 import 'package:get/get.dart';
 
 class SplashScreen2 extends StatefulWidget {
@@ -14,8 +14,6 @@ class _SplashScreen2State extends State<SplashScreen2>
     with TickerProviderStateMixin {
   PageController controller = PageController();
   late TabController _tabController = TabController(length: 3, vsync: this);
-
-  int _curr = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -74,9 +72,9 @@ class _SplashScreen2State extends State<SplashScreen2>
         Expanded(
           child: PageView(
             controller: controller,
+            physics: BouncingScrollPhysics(),
             // ignore: avoid_types_as_parameter_names
             onPageChanged: (num) {
-              _curr = num;
               _tabController.index = num;
             },
             scrollDirection: Axis.horizontal,
@@ -115,6 +113,7 @@ class _SplashScreen2State extends State<SplashScreen2>
           ),
         ),
         TabPageSelector(
+          indicatorSize: 8,
           controller: _tabController,
           selectedColor: Constants.whiteColor,
         ),
@@ -122,7 +121,7 @@ class _SplashScreen2State extends State<SplashScreen2>
           padding: const EdgeInsets.only(bottom: 40.0, top: 10),
           child: ElevatedButton(
             onPressed: () {
-              Get.to(SplashScreen2());
+              Get.to(Signup());
             },
             style: ElevatedButton.styleFrom(
                 backgroundColor:
@@ -132,9 +131,13 @@ class _SplashScreen2State extends State<SplashScreen2>
                         Constants.buttonBorderRadius,
                         Constants.buttonBorderRadius)),
                     side: BorderSide(color: Constants.whiteColor, width: 2))),
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-              child: Text("Shopping View"),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+              child: Text(
+                "Shopping View",
+                style: TextStyle(
+                    fontWeight: FontWeight.w500, color: Constants.whiteColor),
+              ),
             ),
           ),
         ),

@@ -61,9 +61,12 @@ class SplashScreen1 extends StatelessWidget {
                               Constants.buttonBorderRadius)),
                           side: BorderSide(
                               color: Constants.whiteColor, width: 2))),
-                  child: const Padding(
+                  child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                    child: Text("Get Started"),
+                    child: Text(
+                      "Get Started",
+                      style: TextStyle(color: Constants.whiteColor),
+                    ),
                   ),
                 ),
               )

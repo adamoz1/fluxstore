@@ -15,7 +15,6 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(fontFamily: "ProductSans"),
       initialRoute: "/",
       getPages: [GetPage(name: "/", page: () => const SplashScreen1())],
-      darkTheme: ThemeData.dark(useMaterial3: false),
       debugShowCheckedModeBanner: false,
     );
   }
