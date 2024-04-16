@@ -12,8 +12,11 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      theme: ThemeData(fontFamily: "ProductSans"),
       initialRoute: "/",
       getPages: [GetPage(name: "/", page: () => const SplashScreen1())],
+      darkTheme: ThemeData.dark(useMaterial3: false),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
