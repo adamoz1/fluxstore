@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluxstore/screens/splash_screen1.dart';
-import 'package:fluxstore/Routes/app_routes.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -15,7 +14,8 @@ class MainApp extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(fontFamily: "ProductSans"),
       initialRoute: "/",
-      getPages: appRoutes(),
+      getPages: [GetPage(name: "/", page: () => const SplashScreen1())],
+      darkTheme: ThemeData.dark(useMaterial3: false),
       debugShowCheckedModeBanner: false,
     );
   }

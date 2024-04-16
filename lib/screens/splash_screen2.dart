@@ -10,14 +10,10 @@ class SplashScreen2 extends StatefulWidget {
   State<SplashScreen2> createState() => _SplashScreen2State();
 }
 
-class _SplashScreen2State extends State<SplashScreen2> with TickerProviderStateMixin {
+class _SplashScreen2State extends State<SplashScreen2>
+    with TickerProviderStateMixin {
   PageController controller = PageController();
-  late TabController _tabController;
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 3, vsync: this);
-  }
+  late TabController _tabController = TabController(length: 3, vsync: this);
 
   int _curr = 0;
 
@@ -81,6 +77,7 @@ class _SplashScreen2State extends State<SplashScreen2> with TickerProviderStateM
             // ignore: avoid_types_as_parameter_names
             onPageChanged: (num) {
               _curr = num;
+              _tabController.index = num;
             },
             scrollDirection: Axis.horizontal,
             children: [
@@ -118,11 +115,11 @@ class _SplashScreen2State extends State<SplashScreen2> with TickerProviderStateM
           ),
         ),
         TabPageSelector(
-            controller: ,
-            selectedColor: Constants.whiteColor,
-          ),
+          controller: _tabController,
+          selectedColor: Constants.whiteColor,
+        ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 40.0),
+          padding: const EdgeInsets.only(bottom: 40.0, top: 10),
           child: ElevatedButton(
             onPressed: () {
               Get.to(SplashScreen2());
@@ -142,7 +139,7 @@ class _SplashScreen2State extends State<SplashScreen2> with TickerProviderStateM
           ),
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height / 8,
+          height: MediaQuery.of(context).size.height / 8.5,
         )
       ],
     );
