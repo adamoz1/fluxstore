@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluxstore/constants.dart';
+import 'package:fluxstore/screens/splash_screen2.dart';
+import 'package:get/get.dart';
 
 class SplashScreen1 extends StatelessWidget {
   const SplashScreen1({super.key});
@@ -20,7 +22,7 @@ class SplashScreen1 extends StatelessWidget {
           Container(
             width: double.infinity,
             height: double.infinity,
-            color: Colors.black.withOpacity(0.15),
+            color: Colors.black.withOpacity(0.50),
           ),
           Column(
             children: [
@@ -31,21 +33,40 @@ class SplashScreen1 extends StatelessWidget {
                   child: Text(
                 "Welcome to GemStore!",
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                     fontSize: 27,
-                    color: Constants().whiteColor),
+                    color: Constants.whiteColor),
               )),
-              SizedBox(
-                height: 10,
+              const SizedBox(
+                height: 20,
               ),
               Center(
                   child: Text(
                 "A home for a fashionita",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Constants().whiteColor),
+                style: TextStyle(fontSize: 18, color: Constants.whiteColor),
               )),
+              Expanded(child: Container()),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 40.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Get.to(SplashScreen2());
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          Constants.whiteColor.withOpacity(0.90).withAlpha(50),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.elliptical(
+                              Constants.buttonBorderRadius,
+                              Constants.buttonBorderRadius)),
+                          side: BorderSide(
+                              color: Constants.whiteColor, width: 2))),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                    child: Text("Get Started"),
+                  ),
+                ),
+              )
             ],
           )
         ],
