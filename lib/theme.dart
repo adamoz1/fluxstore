@@ -5,11 +5,13 @@ import 'package:get/get_core/src/get_main.dart';
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   textTheme: TextTheme(bodyText1: TextStyle(color: Colors.black)),
-  fontFamily: "ProductSans"
+  fontFamily: "ProductSans",
+    iconTheme: IconThemeData(color: Colors.black)
 );
 
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   textTheme: TextTheme(bodyText1: TextStyle(color: Colors.white)),
     fontFamily: "ProductSans",
+  iconTheme: IconThemeData(color: Colors.white)
 );
