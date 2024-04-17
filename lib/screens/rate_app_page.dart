@@ -61,7 +61,7 @@ class _RateAppPageState extends State<RateAppPage> {
               itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
               itemBuilder: (context, _) => Icon(
                 Icons.star,
-                color: Get.isDarkMode ? Colors.white60 : Colors.black,
+                color: Get.isDarkMode ? Colors.white : Colors.black,
               ),
               onRatingUpdate: (rating) {
                 rateAppController.rating.value = rating.toString();
@@ -101,7 +101,7 @@ class _RateAppPageState extends State<RateAppPage> {
                     icon: ImageIcon(
                       AssetImage('assets/gallary.png'),
                       size: 60,
-                      color: Get.isDarkMode ? Colors.white60 : Colors.black38,
+                      color: Get.isDarkMode ? Colors.white : Colors.black38,
                     ),
                   ),
                   IconButton(
@@ -112,12 +112,26 @@ class _RateAppPageState extends State<RateAppPage> {
                     icon: ImageIcon(
                       AssetImage('assets/camera.png'),
                       size: 60,
-                      color: Get.isDarkMode ? Colors.white60 : Colors.black38,
+                      color: Get.isDarkMode ? Colors.white : Colors.black38,
                     ),
                   ),
                 ],
               ),
             ),
+            SizedBox(
+              height: 30,
+            ),
+            Container(
+              width: 350,
+              height: 50,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Get.isDarkMode ? Colors.white : Colors.black
+                ),
+                  onPressed: (){
+
+              }, child: Text('Submit Review',style: TextStyle(color: Get.isDarkMode ? Colors.black : Colors.white),)),
+            )
           ],
         ),
       ),
