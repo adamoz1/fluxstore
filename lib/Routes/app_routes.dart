@@ -5,6 +5,9 @@ import 'package:fluxstore/screens/splash_screen1.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 
 import '../screens/profile_page.dart';
+import '../screens/signin.dart';
+import '../screens/signup.dart';
+import '../screens/splash_screen2.dart';
 
 appRoutes() => [
       GetPage(name: '/', page: () => const HomePage()),

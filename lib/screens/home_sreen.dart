@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluxstore/Common/common_drawer.dart';
+import 'package:fluxstore/common/bottom_navigation.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
@@ -50,7 +51,10 @@ class _HomePageState extends State<HomePage> {
 
       ),
       drawer: CommonDrawer(),
-
+      body: Center(
+        child: Text('Home Page'),
+      ),
+      bottomNavigationBar: BottomNavigationPage(),
 
     );
   }
