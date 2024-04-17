@@ -40,7 +40,7 @@ class _CommonDrawerState extends State<CommonDrawer> {
               leading: const Icon(Icons.home_outlined,size: 25,),
               title: const Text('Homepage', style: TextStyle(fontSize: 20),),
               onTap: () {
-
+                Get.offAndToNamed('/homepage');
               },
             ),
           ),
@@ -55,6 +55,7 @@ class _CommonDrawerState extends State<CommonDrawer> {
               leading: const Icon(Icons.search,size: 25,),
               title: const Text('Discover', style: TextStyle(fontSize: 20),),
               onTap: () {
+                Get.offAndToNamed('/discoverpage');
 
               },
             ),
@@ -70,6 +71,7 @@ class _CommonDrawerState extends State<CommonDrawer> {
               leading: const Icon(Icons.shopping_bag_outlined,size: 25,),
               title: const Text('My Order', style: TextStyle(fontSize: 20),),
               onTap: () {
+                Get.offAndToNamed('/orderpage');
 
               },
             ),
@@ -84,6 +86,7 @@ class _CommonDrawerState extends State<CommonDrawer> {
               leading: const Icon(Icons.person_outline_outlined,size: 25,),
               title: const Text('My Profile', style: TextStyle(fontSize: 20),),
               onTap: () {
+                Get.offAndToNamed('/profile');
 
               },
             ),
@@ -110,7 +113,7 @@ class _CommonDrawerState extends State<CommonDrawer> {
               leading: const Icon(Icons.settings_outlined,size: 25,),
               title: const Text('Setting', style: TextStyle(fontSize: 20),),
               onTap: () {
-
+                Get.offAndToNamed('/setting');
               },
             ),
           ),

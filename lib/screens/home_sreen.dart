@@ -17,11 +17,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        leading: IconButton(
-            icon: ImageIcon(AssetImage('assets/drawer_icon.png')),
-            onPressed: () {
-              _scaffoldKey.currentState?.openDrawer();
-            }),
+        leading: Padding(
+          padding: const EdgeInsets.only(left:20.0),
+          child: IconButton(
+              icon: ImageIcon(AssetImage('assets/drawer_icon.png')),
+              onPressed: () {
+                _scaffoldKey.currentState?.openDrawer();
+              }),
+        ),
         title: const Text('Gemstore'),
         centerTitle: true,
         actions: [

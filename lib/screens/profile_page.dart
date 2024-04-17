@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluxstore/common/bottom_navigation.dart';
+import 'package:get/get.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -32,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(height: 30,),
             Card(
               margin: const EdgeInsets.all(20.0),
-              color: Colors.white,
+              // color: Colors.white,
               child: ListView(
                 shrinkWrap: true, // Ensure that the ListView takes only the space it needs
                 physics: NeverScrollableScrollPhysics(),
@@ -74,7 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       leading: const ImageIcon(AssetImage('assets/voucher.png')),
                       title: const Text('Voucher'),
                       onTap: (){
-
+                          Get.offAndToNamed('/voucher');
                       },
                       trailing: const Icon(Icons.arrow_forward_ios),
                     ),

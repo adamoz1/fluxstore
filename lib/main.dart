@@ -20,7 +20,7 @@ class MainApp extends StatelessWidget {
 
       theme: lightTheme,
       darkTheme: darkTheme,
-      initialRoute: "/",
+      initialRoute: "/homepage",
       getPages: appRoutes(),
       themeMode: ThemeController().isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
       debugShowCheckedModeBanner: false,
