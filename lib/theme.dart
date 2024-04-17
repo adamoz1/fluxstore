@@ -21,6 +21,12 @@ ThemeData darkTheme = ThemeData(
     iconTheme: const IconThemeData(color: Colors.white),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     selectedItemColor: Colors.white, // Icon color for dark theme
-    unselectedItemColor: Colors.white54, // Unselected icon color for dark theme
+    unselectedItemColor: Colors.white54,
+      unselectedIconTheme: IconThemeData(
+        color: Colors.white,
+      ),
+      selectedIconTheme: IconThemeData(
+        color: Colors.white,
+      ),// Unselected icon color for dark theme
     ),
 );

@@ -55,7 +55,7 @@ class _SettingPageState extends State<SettingPage> {
               title: const Text('Notification'),
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: (){
-                Get.offAndToNamed('notificationSetting');
+                Get.offAndToNamed('/notificationSetting');
               },
             ),
           ),

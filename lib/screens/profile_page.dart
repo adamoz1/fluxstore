@@ -27,7 +27,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 title: const Text('Sunie Pham'),
                 subtitle: const Text('sunieux@gmail.com'),
-                trailing: IconButton(onPressed: (){},icon: const Icon(Icons.settings),),
+                trailing: IconButton(onPressed: (){
+                  Get.offAndToNamed('/setting');
+                },icon: const Icon(Icons.settings),),
               ),
             ),
             const SizedBox(height: 30,),
@@ -35,6 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
               margin: const EdgeInsets.all(20.0),
               // color: Colors.white,
               child: ListView(
+
                 shrinkWrap: true, // Ensure that the ListView takes only the space it needs
                 physics: NeverScrollableScrollPhysics(),
                 padding: EdgeInsets.only(bottom: 8.0),
@@ -42,7 +45,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ListTile(
-                        leading: const Icon(Icons.location_on_rounded),
+                        leading: Icon(Icons.location_on_rounded,color: Get.isDarkMode ? Colors.white60 : Colors.black26),
                         title: const Text('Address'),
                         onTap: (){
 
@@ -57,7 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ListTile(
-                      leading: const Icon(Icons.wallet_outlined),
+                      leading: Icon(Icons.wallet_outlined,color: Get.isDarkMode ? Colors.white60 : Colors.black26),
                       title: const Text('Payment Method'),
                       onTap: (){
 
@@ -72,7 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ListTile(
-                      leading: const ImageIcon(AssetImage('assets/voucher.png')),
+                      leading: ImageIcon(AssetImage('assets/voucher.png'),color: Get.isDarkMode ? Colors.white60 : Colors.black26,),
                       title: const Text('Voucher'),
                       onTap: (){
                           Get.offAndToNamed('/voucher');
@@ -87,7 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ListTile(
-                      leading: const Icon(Icons.favorite),
+                      leading: Icon(Icons.favorite,color: Get.isDarkMode ? Colors.white60 : Colors.black26),
                       title: const Text('Wishlist'),
                       onTap: (){
 
@@ -102,10 +105,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ListTile(
-                      leading: const Icon(Icons.star_rounded),
+                      leading: Icon(Icons.star_rounded,color: Get.isDarkMode ? Colors.white60 : Colors.black26 ),
                       title: const Text('Rate this app'),
                       onTap: (){
-
+                          Get.offAndToNamed('/rateApp');
                       },
                       trailing: const Icon(Icons.arrow_forward_ios),
                     ),
@@ -117,17 +120,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ListTile(
-                      leading: const Icon(Icons.logout),
+                      leading: Icon(Icons.logout,color: Get.isDarkMode ? Colors.white60 : Colors.black26),
                       title: const Text('Log Out'),
                       onTap: (){
 
                       },
                     ),
                   ),
-                  const Divider(
-                    color: Colors.black12,
-                    height: 0.8,
-                  ),
+
                 ],
               ),
             )
