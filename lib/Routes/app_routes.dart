@@ -1,4 +1,3 @@
-import 'package:fluxstore/Common/common_drawer.dart';
 import 'package:fluxstore/screens/discover_page.dart';
 import 'package:fluxstore/screens/home_sreen.dart';
 import 'package:fluxstore/screens/notification_page.dart';

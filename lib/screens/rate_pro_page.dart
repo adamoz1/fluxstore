@@ -120,6 +120,7 @@ class _RateProductState extends State<RateProduct> {
                     if (value == null) {
                       return "Please Enter the Comment";
                     }
+                    return null;
                   },
                   decoration: const InputDecoration(
                       counterText: '50 characters',

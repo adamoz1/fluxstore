@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluxstore/controller/theme_controller.dart';
-import 'package:fluxstore/screens/home_sreen.dart';
 import 'package:get/get.dart';
 
 import '../controller/bottomnavigation_coontroller.dart';
