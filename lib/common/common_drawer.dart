@@ -31,6 +31,7 @@ class _CommonDrawerState extends State<CommonDrawer> {
             ),
             padding: const EdgeInsets.all(5.0),
             child: ListTile(
+<<<<<<< HEAD
               leading: const Icon(
                 Icons.home_outlined,
                 size: 25,
@@ -38,9 +39,77 @@ class _CommonDrawerState extends State<CommonDrawer> {
               title: const Text(
                 'Homepage',
                 style: TextStyle(fontSize: 20),
-              ),
+=======
+              leading: const Icon(Icons.home_outlined,size: 25,),
+              title: const Text('Homepage', style: TextStyle(fontSize: 20),),
               onTap: () {
                 Get.offAndToNamed('/homepage');
+              },
+            ),
+          ),
+
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(7.0),
+
+            ),
+            padding: const EdgeInsets.all(5.0),
+            child: ListTile(
+              leading: const Icon(Icons.search,size: 25,),
+              title: const Text('Discover', style: TextStyle(fontSize: 20),),
+              onTap: () {
+                Get.offAndToNamed('/discoverpage');
+
+              },
+            ),
+          ),
+
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(7.0),
+
+            ),
+            padding: const EdgeInsets.all(5.0),
+            child: ListTile(
+              leading: const Icon(Icons.shopping_bag_outlined,size: 25,),
+              title: const Text('My Order', style: TextStyle(fontSize: 20),),
+              onTap: () {
+                Get.offAndToNamed('/orderpage');
+
+              },
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(7.0),
+
+            ),
+            padding: const EdgeInsets.all(5.0),
+            child: ListTile(
+              leading: const Icon(Icons.person_outline_outlined,size: 25,),
+              title: const Text('My Profile', style: TextStyle(fontSize: 20),),
+              onTap: () {
+                Get.offAndToNamed('/profile');
+
+              },
+            ),
+          ),
+
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(7.0),
+
+            ),
+              padding: const EdgeInsets.fromLTRB(
+                30.0,20.0,10.0,20.0
+>>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
+              ),
+              onTap: () {
+<<<<<<< HEAD
+                Get.offAndToNamed('/homepage');
+=======
+                Get.offAndToNamed('/setting');
+>>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
               },
             ),
           ),

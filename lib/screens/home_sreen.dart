@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluxstore/Common/common_drawer.dart';
 import 'package:fluxstore/common/bottom_navigation.dart';
+<<<<<<< HEAD
 import 'package:fluxstore/constants.dart';
 import 'package:fluxstore/controller/product_controller.dart';
 import 'package:fluxstore/controller/theme_controller.dart';
+=======
+>>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
 import 'package:get/get.dart';
 
 import '../Routes/app_routes.dart';
@@ -26,6 +29,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
+<<<<<<< HEAD
         leading: IconButton(
             icon: const ImageIcon(
               AssetImage('assets/drawer_icon.png'),
@@ -38,6 +42,17 @@ class _HomePageState extends State<HomePage> {
           'Gemstore',
           style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
         ),
+=======
+        leading: Padding(
+          padding: const EdgeInsets.only(left:20.0),
+          child: IconButton(
+              icon: ImageIcon(AssetImage('assets/drawer_icon.png')),
+              onPressed: () {
+                _scaffoldKey.currentState?.openDrawer();
+              }),
+        ),
+        title: const Text('Gemstore'),
+>>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
         centerTitle: true,
         actions: [
           IconButton(
@@ -65,6 +80,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       drawer: CommonDrawer(),
+<<<<<<< HEAD
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 15.0),
         child: ListView(
@@ -83,6 +99,13 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       bottomNavigationBar: const BottomNavigationPage(),
+=======
+      body: Center(
+        child: Text('Home Page'),
+      ),
+      bottomNavigationBar: BottomNavigationPage(),
+
+>>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
     );
   }
 

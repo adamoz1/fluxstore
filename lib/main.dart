@@ -23,8 +23,13 @@ class MainApp extends StatelessWidget {
     return GetMaterialApp(
       theme: lightTheme,
       darkTheme: darkTheme,
+<<<<<<< HEAD
       initialRoute:  _checkIsLogin(),
       getPages: AppRoute.appRoute,
+=======
+      initialRoute: "/homepage",
+      getPages: appRoutes(),
+>>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
       themeMode: ThemeController().isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
       debugShowCheckedModeBanner: false,
     );

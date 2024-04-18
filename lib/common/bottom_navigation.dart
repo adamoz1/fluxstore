@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:fluxstore/controller/theme_controller.dart';
+=======
+>>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
 import 'package:fluxstore/screens/home_sreen.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +17,7 @@ class BottomNavigationPage extends StatefulWidget {
 
 class _BottomNavigationPageState extends State<BottomNavigationPage> {
   final BottomNavigationBarController controller =
+<<<<<<< HEAD
       Get.put(BottomNavigationBarController());
 
   final ThemeController themeController = Get.put(ThemeController());
@@ -86,3 +90,42 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
             : Colors.black.withOpacity(0.6));
   }
 }
+=======
+  Get.put(BottomNavigationBarController());
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() => BottomNavigationBar(
+      currentIndex: controller.currentIndex.value,
+      onTap: (index) {
+        controller.changePage(index);
+      },
+      selectedItemColor: Colors.black,
+      unselectedItemColor: Colors.black26,
+      type: BottomNavigationBarType.fixed, // Set type to fixed
+      showSelectedLabels: false, // Hide labels
+      showUnselectedLabels: false,
+      elevation: 8.0, // Add some elevation for a subtle shadow effect
+
+      items: [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home_outlined, color: Get.isDarkMode ? Colors.white : Colors.black,size: 30,),
+          label: ''
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search, color: Get.isDarkMode ? Colors.white : Colors.black,size: 30,),
+            label: ''
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.shopping_bag_outlined, color: Get.isDarkMode ? Colors.white : Colors.black,size: 30,),
+            label: ''
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person_outline_outlined, color: Get.isDarkMode ? Colors.white : Colors.black,size: 30,),
+            label: ''
+        ),
+      ],
+    ));
+  }
+}
+>>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436

@@ -3,9 +3,13 @@ import 'package:fluxstore/screens/discover_page.dart';
 import 'package:fluxstore/screens/home_sreen.dart';
 import 'package:fluxstore/screens/notification_page.dart';
 import 'package:fluxstore/screens/order_page.dart';
+<<<<<<< HEAD
 import 'package:fluxstore/screens/profile_setting.dart';
 import 'package:fluxstore/screens/rate_app_page.dart';
 import 'package:fluxstore/screens/rate_pro_page.dart';
+=======
+import 'package:fluxstore/screens/rate_app_page.dart';
+>>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
 import 'package:fluxstore/screens/setting_page.dart';
 import 'package:fluxstore/screens/settings_notification.dart';
 import 'package:fluxstore/screens/splash_screen1.dart';
@@ -17,6 +21,7 @@ import '../screens/profile_page.dart';
 import '../screens/signin.dart';
 import '../screens/signup.dart';
 import '../screens/splash_screen2.dart';
+<<<<<<< HEAD
 import '../screens/verification.dart';
 
 class AppRoute {
@@ -38,6 +43,26 @@ class AppRoute {
   static String forgetPassword = '/forgetpassword';
   static String rateProduct = '/ratePro';
   static String profileSetting = '/profileSetting';
+=======
+
+
+
+
+appRoutes() => [
+      GetPage(name: '/homepage', page: () => const HomePage()),
+      GetPage(name: '/notification', page:() => const NotificationPage()),
+      GetPage(name: '/profile',page: () => const ProfilePage()),
+      GetPage(name: '/splash1', page: () => const SplashScreen1()),
+      GetPage(name: '/splash2', page: () => SplashScreen2()),
+      GetPage(name: '/signin', page: () => Signin()),
+      GetPage(name: '/signup', page: () => Signup()),
+      GetPage(name: '/orderpage', page: () => const OrderPage()),
+      GetPage(name: '/discoverpage', page: () => const DiscoverPage()),
+      GetPage(name: '/voucher', page: () => const VoucherPage()),
+      GetPage(name: '/setting', page: () => const SettingPage()),
+      GetPage(name: '/notificationSetting', page: () => const NotificationSettingPage()),
+      GetPage(name: '/rateApp', page: () => const RateAppPage()),
+>>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
 
   static final appRoute = [
     GetPage(name: homePage, page: () => const HomePage()),
