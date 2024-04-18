@@ -269,7 +269,7 @@ class _HomePageState extends State<HomePage> {
                   height: 230,
                   width: 200,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      borderRadius: const BorderRadius.all(Radius.circular(30)),
                       image: DecorationImage(
                           image: AssetImage(
                               productController.productList[index].imagePath ??
@@ -466,12 +466,12 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 30),
             child: collectionCard("assets/slim_and_beauty.png",
                 "|  Sale upto 40%", firstTitle, FontWeight.w100, 180.0),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 30),
             child: collectionCard(
                 "assets/fabulous_design.png",
                 "|  Summer Collection 2021",
@@ -511,9 +511,9 @@ class _HomePageState extends State<HomePage> {
                   alignment: Alignment.centerRight,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 15.0),
+                      padding: const EdgeInsets.only(right: 12.0),
                       child: CircleAvatar(
-                        radius: cardHeight / 3,
+                        radius: cardHeight / 3.1,
                         backgroundColor: theme
                             ? Constants.collectionCirleColorDM
                             : Constants.collectionCirleColor,
@@ -522,7 +522,7 @@ class _HomePageState extends State<HomePage> {
                     Container(
                       alignment: Alignment.centerRight,
                       height: cardHeight,
-                      width: 150,
+                      width: 130,
                       decoration: BoxDecoration(
                           image:
                               DecorationImage(image: AssetImage("$imagePath"))),

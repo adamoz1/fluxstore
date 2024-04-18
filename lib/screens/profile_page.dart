@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluxstore/Routes/app_routes.dart';
 import 'package:fluxstore/common/bottom_navigation.dart';
+import 'package:fluxstore/others/shared_prefs.dart';
 import 'package:get/get.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -136,7 +137,11 @@ class _ProfilePageState extends State<ProfilePage> {
                           color:
                               Get.isDarkMode ? Colors.white60 : Colors.black26),
                       title: const Text('Log Out'),
-                      onTap: () {},
+                      onTap: () {
+                        SharedPrefs.sharedPreferences
+                            .setString("isLogin", "false");
+                        Get.offAllNamed(AppRoute.signin);
+                      },
                     ),
                   ),
                 ],
