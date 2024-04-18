@@ -12,8 +12,7 @@ Future<void> main() async {
   runApp(const MainApp());
 }
 
-class ProductController {
-}
+class ProductController {}
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -23,14 +22,10 @@ class MainApp extends StatelessWidget {
     return GetMaterialApp(
       theme: lightTheme,
       darkTheme: darkTheme,
-<<<<<<< HEAD
-      initialRoute:  _checkIsLogin(),
+      initialRoute: _checkIsLogin(),
       getPages: AppRoute.appRoute,
-=======
-      initialRoute: "/homepage",
-      getPages: appRoutes(),
->>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
-      themeMode: ThemeController().isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
+      themeMode:
+          ThemeController().isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
       debugShowCheckedModeBanner: false,
     );
   }
@@ -40,7 +35,8 @@ class MainApp extends StatelessWidget {
       if (SharedPrefs.sharedPreferences.getString("isLogin") == "true") {
         return AppRoute.homePage;
       } else {
-        if(SharedPrefs.sharedPreferences.getString("seenLandingPage") != "true"){
+        if (SharedPrefs.sharedPreferences.getString("seenLandingPage") !=
+            "true") {
           return AppRoute.splashScreen1;
         }
         return AppRoute.signin;

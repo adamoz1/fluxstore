@@ -4,11 +4,8 @@ import 'package:fluxstore/controller/rateapp_controller.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-<<<<<<< HEAD
 import '../model/AppFeedback.dart';
 
-=======
->>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
 class RateAppPage extends StatefulWidget {
   const RateAppPage({Key? key}) : super(key: key);
 
@@ -17,10 +14,9 @@ class RateAppPage extends StatefulWidget {
 }
 
 class _RateAppPageState extends State<RateAppPage> {
-<<<<<<< HEAD
   final RateAppController rateAppController = Get.put(RateAppController());
 
-  void clear(){
+  void clear() {
     rateAppController.rating.value = 0.0;
     rateAppController.comment.clear();
     rateAppController.imagesList = [];
@@ -28,33 +24,19 @@ class _RateAppPageState extends State<RateAppPage> {
 
   @override
   Widget build(BuildContext context) {
-=======
-  @override
-  Widget build(BuildContext context) {
-    final RateAppController rateAppController = Get.put(RateAppController());
->>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
-
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.only(left: 30.0),
           child: IconButton(
             icon: Container(
-<<<<<<< HEAD
               padding: const EdgeInsets.only(left: 5.0),
-=======
-              padding: EdgeInsets.only(left: 5.0),
->>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
               height: 50,
               width: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
               ),
-<<<<<<< HEAD
               child: const Icon(Icons.arrow_back_ios),
-=======
-              child: Icon(Icons.arrow_back_ios),
->>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
             ),
             onPressed: () {
               Get.offAndToNamed('/profile');
@@ -79,59 +61,36 @@ class _RateAppPageState extends State<RateAppPage> {
             ),
             RatingBar.builder(
               itemSize: 45,
-<<<<<<< HEAD
               initialRating: rateAppController.rating.value,
-=======
-              initialRating: 4,
->>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
               minRating: 1,
               direction: Axis.horizontal,
               allowHalfRating: true,
               itemCount: 5,
-<<<<<<< HEAD
               itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-=======
-              itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
->>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
               itemBuilder: (context, _) => Icon(
                 Icons.star,
                 color: Get.isDarkMode ? Colors.white : Colors.black,
               ),
               onRatingUpdate: (rating) {
-<<<<<<< HEAD
                 rateAppController.rating.value = rating;
-=======
-                rateAppController.rating.value = rating.toString();
->>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
               },
             ),
             const SizedBox(
               height: 30,
             ),
             Card(
-<<<<<<< HEAD
               margin: const EdgeInsets.only(right: 30, left: 30),
-=======
-              margin: EdgeInsets.only(right: 30, left: 30),
->>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
               child: Padding(
                 padding: const EdgeInsets.all(18.0),
                 child: TextFormField(
                   controller: rateAppController.comment,
                   maxLines: 12,
                   maxLength: 50,
-<<<<<<< HEAD
                   decoration: const InputDecoration(
                     counterText: '50 characters',
                     border: InputBorder.none,
                     hintText:
                         'Would you like to write anything about this product?',
-=======
-                  decoration: InputDecoration(
-                    counterText: '50 characters',
-                    border: InputBorder.none,
-                    hintText: 'Would you like to write anything about this product?',
->>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
                   ),
                 ),
               ),
@@ -145,36 +104,20 @@ class _RateAppPageState extends State<RateAppPage> {
                 children: [
                   IconButton(
                     onPressed: () {
-<<<<<<< HEAD
                       rateAppController.getImage(ImageSource.gallery);
                     },
                     icon: ImageIcon(
                       const AssetImage('assets/gallary.png'),
-=======
-                      debugPrint("Back button pressed");
-                      Get.offAndToNamed('/profile');
-                    },
-                    icon: ImageIcon(
-                      AssetImage('assets/gallary.png'),
->>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
                       size: 60,
                       color: Get.isDarkMode ? Colors.white : Colors.black38,
                     ),
                   ),
                   IconButton(
                     onPressed: () {
-<<<<<<< HEAD
                       rateAppController.getImage(ImageSource.camera);
                     },
                     icon: ImageIcon(
                       const AssetImage('assets/camera.png'),
-=======
-                      debugPrint("Gallery button pressed");
-                      rateAppController.getImage(ImageSource.gallery);
-                    },
-                    icon: ImageIcon(
-                      AssetImage('assets/camera.png'),
->>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
                       size: 60,
                       color: Get.isDarkMode ? Colors.white : Colors.black38,
                     ),
@@ -182,23 +125,17 @@ class _RateAppPageState extends State<RateAppPage> {
                 ],
               ),
             ),
-<<<<<<< HEAD
             const SizedBox(
-=======
-            SizedBox(
->>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
               height: 30,
             ),
             Container(
               width: 350,
               height: 50,
               child: ElevatedButton(
-<<<<<<< HEAD
                   style: ElevatedButton.styleFrom(
                       backgroundColor:
                           Get.isDarkMode ? Colors.white : Colors.black),
                   onPressed: () {
-
                     final rating = rateAppController.rating.value;
                     final comment = rateAppController.comment.text.trim();
 
@@ -225,7 +162,8 @@ class _RateAppPageState extends State<RateAppPage> {
                     }
 
                     final newReview = AppFeedback(
-                      rating: rateAppController.rating.value, // You need to set the rating value here
+                      rating: rateAppController.rating
+                          .value, // You need to set the rating value here
                       comment: rateAppController.comment.text,
                       images: rateAppController.imagesList,
                     );
@@ -239,22 +177,12 @@ class _RateAppPageState extends State<RateAppPage> {
                     style: TextStyle(
                         color: Get.isDarkMode ? Colors.black : Colors.white),
                   )),
-=======
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Get.isDarkMode ? Colors.white : Colors.black
-                ),
-                  onPressed: (){
-
-              }, child: Text('Submit Review',style: TextStyle(color: Get.isDarkMode ? Colors.black : Colors.white),)),
->>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
             )
           ],
         ),
       ),
     );
   }
-<<<<<<< HEAD
-
 
   Future<void> _showDialog() {
     return showDialog(
@@ -295,8 +223,6 @@ We’ll use your feedback to improve
             Center(
               child: ElevatedButton(
                 onPressed: () {
-
-
                   Get.back();
                 },
                 style: ElevatedButton.styleFrom(
@@ -315,6 +241,4 @@ We’ll use your feedback to improve
       },
     );
   }
-=======
->>>>>>> 08c7101a577dd6c603bb941a5a372696b848e436
 }

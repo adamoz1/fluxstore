@@ -3,7 +3,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluxstore/controller/rateproduct_controller.dart';
 import 'package:fluxstore/model/ProductFeedback.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:image_picker/image_picker.dart';
 
 class RateProduct extends StatefulWidget {
