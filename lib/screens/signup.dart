@@ -1,30 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:fluxstore/Routes/app_routes.dart';
 import 'package:fluxstore/constants.dart';
-import 'package:fluxstore/screens/signin.dart';
+import 'package:fluxstore/controller/login_controller.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
-class Signup extends StatelessWidget {
+class Signup extends StatefulWidget {
   Signup({super.key});
 
+  @override
+  State<Signup> createState() => _SignupState();
+}
+
+class _SignupState extends State<Signup> {
   late List<Widget> columnData = [];
+
+  @override
+  void initState() {
+    super.initState();
+    initList();
+  }
+
   TextEditingController name = TextEditingController();
+
   TextEditingController address = TextEditingController();
+
   TextEditingController pass = TextEditingController();
+
   TextEditingController confipass = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    initList();
     return Scaffold(
       body: ListView(shrinkWrap: true, children: [
         Container(
           height: MediaQuery.of(context).size.height - 30,
           child: Padding(
-            padding: EdgeInsets.only(
-                right: 30,
-                left: 30,
-                top: MediaQuery.of(context).size.height / 10),
+            padding: const EdgeInsets.only(
+              right: 30,
+              left: 30,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: columnData,
@@ -37,6 +52,7 @@ class Signup extends StatelessWidget {
 
   initList() {
     columnData = [
+      Expanded(child: Container()),
       const Padding(
         padding: EdgeInsets.only(bottom: 15),
         child: Text(
@@ -84,7 +100,25 @@ class Signup extends StatelessWidget {
         child: Center(
           child: ElevatedButton(
             onPressed: () {
-              // Get.to(Signup());
+              if (pass.text == confipass.text) {
+                LoginController controller = LoginController();
+                if (controller.register(name.text, pass.text) &&
+                    address.text.isNotEmpty) {
+                  Get.offAllNamed(AppRoute.signin);
+                } else {
+                  if (LoginController().validateEmail(address.text)) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Fill Proper Email Address")));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Fill Every Field Information")));
+                  }
+                }
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar((const SnackBar(
+                    content: Text(
+                        "Password and Confirm Password are not same!!!"))));
+              }
             },
             style: ElevatedButton.styleFrom(
                 backgroundColor: Constants.buttonBrownColor,
@@ -128,7 +162,7 @@ class Signup extends StatelessWidget {
                     onPressed: () {},
                     icon: Icon(Icons.apple_rounded),
                   )),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               Container(
@@ -140,7 +174,7 @@ class Signup extends StatelessWidget {
                     onPressed: () {},
                     icon: Image.asset('assets/google.png'),
                   )),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               Container(
@@ -161,7 +195,7 @@ class Signup extends StatelessWidget {
           const Text("Already have account?"),
           TextButton(
               onPressed: () {
-                Get.to(Signin());
+                Get.toNamed(AppRoute.signin);
               },
               style: ElevatedButton.styleFrom(
                 splashFactory: NoSplash.splashFactory,
@@ -174,7 +208,7 @@ class Signup extends StatelessWidget {
               )),
         ],
       ),
-      SizedBox(
+      const SizedBox(
         height: 20,
       )
     ];

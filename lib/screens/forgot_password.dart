@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fluxstore/controller/login_controller.dart';
+import 'package:get/get.dart';
 
+import '../Routes/app_routes.dart';
 import '../constants.dart';
 
+// ignore: must_be_immutable
 class ForgetPassword extends StatelessWidget {
   ForgetPassword({super.key});
   late List<Widget> columnData = [];
@@ -11,8 +15,8 @@ class ForgetPassword extends StatelessWidget {
     initList(context);
     return Scaffold(
       body: SafeArea(
-        child: ListView(
-          children: [SizedBox(
+        child: ListView(children: [
+          SizedBox(
             height: MediaQuery.of(context).size.height - 30,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -21,15 +25,39 @@ class ForgetPassword extends StatelessWidget {
                 children: columnData,
               ),
             ),
-          ),]
-        ),
+          ),
+        ]),
       ),
     );
   }
 
-  void initList(context){
+  void initList(context) {
     columnData = [
-      const SizedBox(height: 15,),
+      const SizedBox(
+        height: 10,
+      ),
+      InkWell(
+        onTap: () {
+          Get.back();
+        },
+        child: Card(
+          shape:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+          color: Constants.whiteColor,
+          child: SizedBox(
+            height: 40,
+            width: 40,
+            child: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Constants.backIconColor,
+              size: 15,
+            ),
+          ),
+        ),
+      ),
+      const SizedBox(
+        height: 40,
+      ),
       const Padding(
         padding: EdgeInsets.only(bottom: 25),
         child: Text(
@@ -39,23 +67,31 @@ class ForgetPassword extends StatelessWidget {
       ),
       const Padding(
         padding: EdgeInsets.only(bottom: 30),
-        child: Text("Enter email associated with you account and we'll send and email with instructions to reset your password",
-          style: TextStyle(fontWeight: FontWeight.w300,fontSize: 17),),
+        child: Text(
+          "Enter email associated with you account and we'll send and email with instructions to reset your password",
+          style: TextStyle(fontWeight: FontWeight.w300, fontSize: 17),
+        ),
       ),
-      SizedBox(height: MediaQuery.of(context).size.height/12,),
-      TextField(controller: email,decoration: const InputDecoration(hintText: "enter your email here",icon: Icon(Icons.email_outlined)),),
+      SizedBox(
+        height: MediaQuery.of(context).size.height / 12,
+      ),
+      TextField(
+        controller: email,
+        decoration: const InputDecoration(
+            hintText: "enter your email here",
+            icon: Icon(Icons.email_outlined)),
+      ),
       Expanded(child: Container()),
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 15),
         child: Center(
           child: ElevatedButton(
             onPressed: () {
-
-              if(email.text.isNotEmpty && RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                  .hasMatch(email.text)){
-                // Get.to(VerifictionPage());
-              }else{
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please enter email")));
+              if (email.text.isNotEmpty && LoginController().validateEmail(email.text)) {
+                Get.toNamed(AppRoute.verification);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Please enter email")));
               }
             },
             style: ElevatedButton.styleFrom(
@@ -78,7 +114,9 @@ class ForgetPassword extends StatelessWidget {
           ),
         ),
       ),
-      const SizedBox(height: 15,)
+      const SizedBox(
+        height: 15,
+      )
     ];
   }
 }

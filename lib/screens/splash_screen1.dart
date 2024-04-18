@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluxstore/Routes/app_routes.dart';
 import 'package:fluxstore/constants.dart';
 import 'package:fluxstore/screens/splash_screen2.dart';
 import 'package:get/get.dart';
@@ -31,30 +32,30 @@ class SplashScreen1 extends StatelessWidget {
               ),
               Center(
                   child: Text(
-                "Welcome to GemStore!",
-                style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 27,
-                    color: Constants.whiteColor),
-              )),
+                    "Welcome to GemStore!",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 27,
+                        color: Constants.whiteColor),
+                  )),
               const SizedBox(
                 height: 20,
               ),
               Center(
                   child: Text(
-                "A home for a fashionita",
-                style: TextStyle(fontSize: 18, color: Constants.whiteColor),
-              )),
+                    "A home for a fashionita",
+                    style: TextStyle(fontSize: 18, color: Constants.whiteColor),
+                  )),
               Expanded(child: Container()),
               Padding(
                 padding: const EdgeInsets.only(bottom: 40.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.to(SplashScreen2());
+                    Get.toNamed(AppRoute.splashScreen2);
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor:
-                          Constants.whiteColor.withOpacity(0.90).withAlpha(50),
+                      Constants.whiteColor.withOpacity(0.90).withAlpha(50),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.elliptical(
                               Constants.buttonBorderRadius,

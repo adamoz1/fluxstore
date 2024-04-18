@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluxstore/Routes/app_routes.dart';
 import 'package:fluxstore/constants.dart';
-import 'package:fluxstore/screens/signup.dart';
+import 'package:fluxstore/others/shared_prefs.dart';
 import 'package:get/get.dart';
 
 class SplashScreen2 extends StatefulWidget {
@@ -48,7 +49,7 @@ class _SplashScreen2State extends State<SplashScreen2>
           child: Text(
             "Discover something new",
             style: TextStyle(
-              fontSize: 30,
+              fontSize: 24,
               fontWeight: FontWeight.w700,
               color: Constants.blackColor,
             ),
@@ -58,11 +59,11 @@ class _SplashScreen2State extends State<SplashScreen2>
         Container(
           width: MediaQuery.of(context).size.width,
           padding:
-              EdgeInsets.only(top: (MediaQuery.of(context).size.height / 17)),
+              EdgeInsets.only(top: (MediaQuery.of(context).size.height / 30)),
           child: Text(
             "Special new arrivals just for you",
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 16,
               fontWeight: FontWeight.w400,
               color: Constants.blackColor,
             ),
@@ -70,58 +71,41 @@ class _SplashScreen2State extends State<SplashScreen2>
           ),
         ),
         Expanded(
-          child: PageView(
-            controller: controller,
-            physics: BouncingScrollPhysics(),
-            // ignore: avoid_types_as_parameter_names
-            onPageChanged: (num) {
-              _tabController.index = num;
-            },
-            scrollDirection: Axis.horizontal,
-            children: [
-              Container(
-                  margin: const EdgeInsets.all(24),
-                  height: MediaQuery.of(context).size.height / 4,
-                  decoration: BoxDecoration(
-                      color: Constants.splashGreyColor1,
-                      borderRadius:
-                          BorderRadius.circular(Constants.buttonBorderRadius),
-                      image: const DecorationImage(
-                          image: AssetImage("assets/splash_image2.png"),
-                          fit: BoxFit.contain))),
-              Container(
-                  margin: const EdgeInsets.all(24),
-                  height: MediaQuery.of(context).size.height / 4,
-                  decoration: BoxDecoration(
-                      color: Constants.splashGreyColor1,
-                      borderRadius:
-                          BorderRadius.circular(Constants.buttonBorderRadius),
-                      image: const DecorationImage(
-                          image: AssetImage("assets/splash_image3.png"),
-                          fit: BoxFit.contain))),
-              Container(
-                  margin: const EdgeInsets.all(24),
-                  height: MediaQuery.of(context).size.height / 4,
-                  decoration: BoxDecoration(
-                      color: Constants.splashGreyColor1,
-                      borderRadius:
-                          BorderRadius.circular(Constants.buttonBorderRadius),
-                      image: const DecorationImage(
-                          image: AssetImage("assets/splash_image4.png"),
-                          fit: BoxFit.contain))),
-            ],
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 30.0),
+            child: PageView(
+              controller: controller,
+              physics: const BouncingScrollPhysics(),
+              onPageChanged: (num) {
+                _tabController.index = num;
+              },
+              scrollDirection: Axis.horizontal,
+              children: [
+                pageViewContent("assets/splash_image2.png"),
+                pageViewContent("assets/splash_image3.png"),
+                pageViewContent("assets/splash_image4.png")
+              ],
+            ),
           ),
+        ),
+        const SizedBox(
+          height: 40,
         ),
         TabPageSelector(
           indicatorSize: 8,
           controller: _tabController,
           selectedColor: Constants.whiteColor,
         ),
+        const SizedBox(
+          height: 20,
+        ),
         Padding(
           padding: const EdgeInsets.only(bottom: 40.0, top: 10),
           child: ElevatedButton(
             onPressed: () {
-              Get.to(Signup());
+              SharedPrefs.sharedPreferences
+                  .setString("seenLandingPage", "true");
+              Get.offAllNamed(AppRoute.signup);
             },
             style: ElevatedButton.styleFrom(
                 backgroundColor:
@@ -142,9 +126,19 @@ class _SplashScreen2State extends State<SplashScreen2>
           ),
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height / 8.5,
+          height: MediaQuery.of(context).size.height / 11.5,
         )
       ],
     );
+  }
+
+  pageViewContent(String image) {
+    return Container(
+        margin: const EdgeInsets.symmetric(vertical: 24, horizontal: 30),
+        decoration: BoxDecoration(
+            color: Constants.splashGreyColor1,
+            borderRadius: BorderRadius.circular(Constants.buttonBorderRadius),
+            image: DecorationImage(
+                image: AssetImage(image), fit: BoxFit.contain)));
   }
 }

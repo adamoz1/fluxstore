@@ -10,26 +10,24 @@ class NotificationPage extends StatelessWidget {
         title: const Text('Notification'),
         centerTitle: true,
       ),
-
-
       body: ListView(
         children: const [
           Card(
-            color: Colors.white,
-            margin: EdgeInsets.only(left: 24.0,right: 24.0,bottom: 8.0,top: 26.0),
+            margin: EdgeInsets.only(
+                left: 24.0, right: 24.0, bottom: 8.0, top: 26.0),
             shadowColor: Colors.black,
             child: ListTile(
               title: Text('Good morning Get 20% Voucher'),
-              subtitle: Text('Summer sale up to 20% off. Limited voucher. Get now!!😜'),
-
+              subtitle: Text(
+                  'Summer sale up to 20% off. Limited voucher. Get now!!😜'),
             ),
           ),
           SizedBox(
             height: 10,
           ),
           Card(
-            color: Colors.white,
-            margin: EdgeInsets.only(left: 24.0,right: 24.0,bottom: 8.0,top: 8.0),
+            margin:
+                EdgeInsets.only(left: 24.0, right: 24.0, bottom: 8.0, top: 8.0),
             shadowColor: Colors.black,
             child: ListTile(
               title: Text('Special offer just for you'),
@@ -40,8 +38,8 @@ class NotificationPage extends StatelessWidget {
             height: 10,
           ),
           Card(
-            color: Colors.white,
-            margin: EdgeInsets.only(left: 24.0,right: 24.0,bottom: 8.0,top: 8.0),
+            margin:
+                EdgeInsets.only(left: 24.0, right: 24.0, bottom: 8.0, top: 8.0),
             shadowColor: Colors.black,
             child: ListTile(
               title: Text('Holiday sale 50%'),
@@ -50,7 +48,6 @@ class NotificationPage extends StatelessWidget {
           ),
         ],
       ),
-
     );
   }
 }

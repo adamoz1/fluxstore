@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluxstore/Routes/app_routes.dart';
 import 'package:fluxstore/constants.dart';
-import 'package:fluxstore/screens/signup.dart';
+import 'package:fluxstore/controller/login_controller.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
@@ -13,7 +14,7 @@ class Signin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    initList();
+    initList(context);
     return Scaffold(
       body: ListView(shrinkWrap: true, children: [
         SizedBox(
@@ -33,7 +34,7 @@ class Signin extends StatelessWidget {
     );
   }
 
-  initList() {
+  initList(context) {
     columnData = [
       const Padding(
         padding: EdgeInsets.only(bottom: 15),
@@ -54,6 +55,7 @@ class Signin extends StatelessWidget {
         child: TextField(
           decoration: const InputDecoration(hintText: "Enter address"),
           controller: address,
+          keyboardType: TextInputType.emailAddress,
         ),
       ),
       Padding(
@@ -64,11 +66,35 @@ class Signin extends StatelessWidget {
         ),
       ),
       Padding(
+        padding: const EdgeInsets.only(bottom: 15),
+        child: Container(
+          width: double.infinity,
+          child: InkWell(
+            onTap: () {
+              Get.toNamed(AppRoute.forgetPassword);
+            },
+            child: Text(
+              "Forgot password?",
+              textAlign: TextAlign.right,
+              style: TextStyle(
+                  color: Constants.blackColor, fontWeight: FontWeight.w100),
+            ),
+          ),
+        ),
+      ),
+      Padding(
         padding: const EdgeInsets.symmetric(vertical: 15),
         child: Center(
           child: ElevatedButton(
             onPressed: () {
-              // Get.to(Signup());
+              LoginController controller = LoginController();
+              var response = controller.canLogin(address.text, pass.text);
+              if (response["status"] == 1) {
+                Get.toNamed(AppRoute.homePage);
+              } else {
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text(response["message"])));
+              }
             },
             style: ElevatedButton.styleFrom(
                 backgroundColor: Constants.buttonBrownColor,
@@ -142,10 +168,10 @@ class Signin extends StatelessWidget {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text("Already have account?"),
+          const Text("Don't have an account?"),
           TextButton(
               onPressed: () {
-                Get.to(Signup());
+                Get.offAllNamed(AppRoute.signup);
               },
               style: ElevatedButton.styleFrom(
                 splashFactory: NoSplash.splashFactory,
