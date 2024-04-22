@@ -19,7 +19,6 @@ class _ProfileSettingState extends State<ProfileSetting> {
               height: 50,
               width: 50,
               decoration: BoxDecoration(
-                // color: Color(0xFFF6F1F5),
                 borderRadius: BorderRadius.circular(50),
               ),
               child: const Icon(Icons.arrow_back_ios),

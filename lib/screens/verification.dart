@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluxstore/Routes/app_routes.dart';
 import 'package:fluxstore/constants.dart';
 import 'package:get/get.dart';
-
-import '../Routes/app_routes.dart';
 
 // ignore: must_be_immutable
 class Verification extends StatelessWidget {
@@ -49,7 +48,7 @@ class Verification extends StatelessWidget {
         },
         child: Card(
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           color: Constants.whiteColor,
           child: SizedBox(
             height: 40,
@@ -132,11 +131,11 @@ class Verification extends StatelessWidget {
           child: TextField(
             controller: tf1,
             focusNode: focusNode1,
-            style: TextStyle(fontSize: 20),
+            style: const TextStyle(fontSize: 20),
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
-              hintStyle: TextStyle(fontSize: 16),
+              hintStyle: const TextStyle(fontSize: 16),
               focusColor: Constants.blackColor,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30),
@@ -148,7 +147,7 @@ class Verification extends StatelessWidget {
                     color: Constants.blackColor,
                   )),
               filled: true,
-              contentPadding: EdgeInsets.all(16),
+              contentPadding: const EdgeInsets.all(16),
               fillColor: Constants.whiteColor,
             ),
             onChanged: (String value) {
@@ -168,11 +167,11 @@ class Verification extends StatelessWidget {
           child: TextField(
             controller: tf2,
             focusNode: focusNode2,
-            style: TextStyle(fontSize: 20),
+            style: const TextStyle(fontSize: 20),
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
-              hintStyle: TextStyle(fontSize: 16),
+              hintStyle: const TextStyle(fontSize: 16),
               focusColor: Constants.blackColor,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30),
@@ -184,7 +183,7 @@ class Verification extends StatelessWidget {
                     color: Constants.blackColor,
                   )),
               filled: true,
-              contentPadding: EdgeInsets.all(16),
+              contentPadding: const EdgeInsets.all(16),
               fillColor: Constants.whiteColor,
             ),
             onChanged: (String value) {
@@ -203,11 +202,11 @@ class Verification extends StatelessWidget {
           child: TextField(
             controller: tf3,
             focusNode: focusNode3,
-            style: TextStyle(fontSize: 20),
+            style: const TextStyle(fontSize: 20),
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
-              hintStyle: TextStyle(fontSize: 16),
+              hintStyle: const TextStyle(fontSize: 16),
               focusColor: Constants.blackColor,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30),
@@ -219,7 +218,7 @@ class Verification extends StatelessWidget {
                     color: Constants.blackColor,
                   )),
               filled: true,
-              contentPadding: EdgeInsets.all(16),
+              contentPadding: const EdgeInsets.all(16),
               fillColor: Constants.whiteColor,
             ),
             onChanged: (String value) {
@@ -238,11 +237,11 @@ class Verification extends StatelessWidget {
           child: TextField(
             controller: tf4,
             focusNode: focusNode4,
-            style: TextStyle(fontSize: 20),
+            style: const TextStyle(fontSize: 20),
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
-              hintStyle: TextStyle(fontSize: 16),
+              hintStyle: const TextStyle(fontSize: 16),
               focusColor: Constants.blackColor,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30),
@@ -254,7 +253,7 @@ class Verification extends StatelessWidget {
                     color: Constants.blackColor,
                   )),
               filled: true,
-              contentPadding: EdgeInsets.all(16),
+              contentPadding: const EdgeInsets.all(16),
               fillColor: Constants.whiteColor,
             ),
             onChanged: (String value) {

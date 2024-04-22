@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluxstore/Common/common_drawer.dart';
+import 'package:fluxstore/Routes/app_routes.dart';
 import 'package:fluxstore/common/bottom_navigation.dart';
 import 'package:fluxstore/constants.dart';
 import 'package:fluxstore/controller/product_controller.dart';
 import 'package:fluxstore/controller/theme_controller.dart';
 import 'package:get/get.dart';
-
-import '../Routes/app_routes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

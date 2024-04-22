@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class Signup extends StatefulWidget {
-  Signup({super.key});
+  const Signup({super.key});
 
   @override
   State<Signup> createState() => _SignupState();
@@ -22,12 +22,9 @@ class _SignupState extends State<Signup> {
   }
 
   TextEditingController name = TextEditingController();
-
   TextEditingController address = TextEditingController();
-
-  TextEditingController pass = TextEditingController();
-
-  TextEditingController confipass = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController confirmpasswordword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +47,7 @@ class _SignupState extends State<Signup> {
     );
   }
 
+  //Initialize list data with widget to be assigned to column.
   initList() {
     columnData = [
       Expanded(child: Container()),
@@ -67,42 +65,18 @@ class _SignupState extends State<Signup> {
       const SizedBox(
         height: 15,
       ),
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15),
-        child: TextField(
-          decoration: const InputDecoration(hintText: "Enter you name"),
-          controller: name,
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15),
-        child: TextField(
-          decoration: const InputDecoration(hintText: "Enter address"),
-          controller: address,
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15),
-        child: TextField(
-          decoration: const InputDecoration(hintText: "Password"),
-          controller: pass,
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15),
-        child: TextField(
-          decoration: const InputDecoration(hintText: "Confirm Password"),
-          controller: confipass,
-        ),
-      ),
+      textFieldControl("Enter your name", name),
+      textFieldControl("Enter address", address),
+      textFieldControl("passwordword", password),
+      textFieldControl("Confirm passwordword", confirmpasswordword),
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 15),
         child: Center(
           child: ElevatedButton(
             onPressed: () {
-              if (pass.text == confipass.text) {
+              if (password.text == confirmpasswordword.text) {
                 LoginController controller = LoginController();
-                if (controller.register(name.text, pass.text) &&
+                if (controller.register(name.text, password.text) &&
                     address.text.isNotEmpty) {
                   Get.offAllNamed(AppRoute.signin);
                 } else {
@@ -117,7 +91,7 @@ class _SignupState extends State<Signup> {
               } else {
                 ScaffoldMessenger.of(context).showSnackBar((const SnackBar(
                     content: Text(
-                        "Password and Confirm Password are not same!!!"))));
+                        "passwordword and Confirm passwordword are not same!!!"))));
               }
             },
             style: ElevatedButton.styleFrom(
@@ -160,7 +134,7 @@ class _SignupState extends State<Signup> {
                   ),
                   child: IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.apple_rounded),
+                    icon: const Icon(Icons.apple_rounded),
                   )),
               const SizedBox(
                 width: 20,
@@ -212,5 +186,16 @@ class _SignupState extends State<Signup> {
         height: 20,
       )
     ];
+  }
+
+  // This method return custom textfield setting hints and controller.
+  textFieldControl(hintWords, controller) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 15),
+      child: TextField(
+        decoration: InputDecoration(hintText: hintWords),
+        controller: controller,
+      ),
+    );
   }
 }

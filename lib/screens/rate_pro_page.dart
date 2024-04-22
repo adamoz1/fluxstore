@@ -50,7 +50,8 @@ class _RateProductState extends State<RateProduct> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 35.0, top: 30.0, right: 20.0),
+              padding:
+                  const EdgeInsets.only(left: 35.0, top: 30.0, right: 20.0),
               child: Container(
                 // width: 740,
                 height: 70,
@@ -61,7 +62,7 @@ class _RateProductState extends State<RateProduct> {
                 child: Center(
                   child: ListTile(
                     leading: ImageIcon(
-                      AssetImage('assets/vector.png'),
+                      const AssetImage('assets/vector.png'),
                       color: Get.isDarkMode ? Colors.black : Colors.white,
                     ),
                     title: Text(
@@ -80,7 +81,7 @@ class _RateProductState extends State<RateProduct> {
               ),
             ),
             const Padding(
-              padding: const EdgeInsets.only(top: 30),
+              padding: EdgeInsets.only(top: 30),
               child: Text(
                 'What is your opinion of GmStore?',
                 style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
@@ -178,7 +179,7 @@ class _RateProductState extends State<RateProduct> {
                     if (rating == 0.0) {
                       // Display error if rating is not provided
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text('Please provide a rating'),
                           backgroundColor: Colors.red,
                         ),
@@ -189,7 +190,7 @@ class _RateProductState extends State<RateProduct> {
                     if (comment.isEmpty) {
                       // Display error if comment is empty
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text('Please enter a comment'),
                           backgroundColor: Colors.red,
                         ),
@@ -231,7 +232,7 @@ class _RateProductState extends State<RateProduct> {
           content: Container(
             width: 350, // Adjust the width as needed
             height: 250, // Adjust the height as needed
-            child: Column(
+            child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [

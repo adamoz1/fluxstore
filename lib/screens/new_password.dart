@@ -6,24 +6,26 @@ import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class NewPassword extends StatefulWidget {
-  NewPassword({super.key});
-
+  const NewPassword({super.key});
   @override
   State<NewPassword> createState() => _NewPasswordState();
 }
 
 class _NewPasswordState extends State<NewPassword> {
   late List<Widget> columnData = [];
-
   TextEditingController pass = TextEditingController();
   TextEditingController confipass = TextEditingController();
-
   bool tf1Visible = false;
   bool tf2Visible = false;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     initList(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: ListView(children: [
@@ -54,7 +56,7 @@ class _NewPasswordState extends State<NewPassword> {
         },
         child: Card(
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           color: Constants.whiteColor,
           child: SizedBox(
             height: 40,
@@ -127,8 +129,9 @@ class _NewPasswordState extends State<NewPassword> {
                   pass.text == confipass.text) {
                 showBottomSheet();
               } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Password and confirm password must be same!!")));
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content:
+                        Text("Password and confirm password must be same!!")));
               }
             },
             style: ElevatedButton.styleFrom(
@@ -184,7 +187,7 @@ class _NewPasswordState extends State<NewPassword> {
                     child: Text(
                       "Your password has been changed",
                       style:
-                      TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
+                          TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
                     ),
                   ),
                   const Padding(
@@ -192,7 +195,7 @@ class _NewPasswordState extends State<NewPassword> {
                     child: Text(
                       "Welcome back! Discover Now!",
                       style:
-                      TextStyle(fontSize: 14, fontWeight: FontWeight.w100),
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w100),
                     ),
                   ),
                   Padding(
@@ -200,7 +203,8 @@ class _NewPasswordState extends State<NewPassword> {
                     child: Center(
                       child: ElevatedButton(
                         onPressed: () {
-                          SharedPrefs.sharedPreferences.setString("isLogin", "true");
+                          SharedPrefs.sharedPreferences
+                              .setString("isLogin", "true");
                           Get.toNamed(AppRoute.homePage);
                         },
                         style: ElevatedButton.styleFrom(

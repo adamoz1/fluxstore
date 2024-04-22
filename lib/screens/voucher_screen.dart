@@ -32,7 +32,7 @@ class _VoucherPageState extends State<VoucherPage> {
       ),
       body: ListView(padding: const EdgeInsets.only(top: 40.0), children: [
         Stack(children: [
-          Image(
+          const Image(
             image: AssetImage('assets/voucher_back.png'),
           ),
           Padding(
@@ -115,7 +115,7 @@ class _VoucherPageState extends State<VoucherPage> {
           ),
         ]),
         Stack(children: [
-          Image(
+          const Image(
             image: AssetImage('assets/voucher_back.png'),
           ),
           Padding(
@@ -198,7 +198,7 @@ class _VoucherPageState extends State<VoucherPage> {
           ),
         ]),
         Stack(children: [
-          Image(
+          const Image(
             image: AssetImage('assets/voucher_back.png'),
           ),
           Padding(

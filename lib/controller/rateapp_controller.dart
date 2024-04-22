@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fluxstore/model/AppFeedback.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:image_picker/image_picker.dart';
 
 class RateAppController extends GetxController {

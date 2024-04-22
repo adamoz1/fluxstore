@@ -17,7 +17,6 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(
@@ -43,12 +42,10 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             Card(
               margin: const EdgeInsets.all(20.0),
-              // color: Colors.white,
               child: ListView(
-                shrinkWrap:
-                    true, // Ensure that the ListView takes only the space it needs
+                shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 8.0),
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -84,7 +81,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     padding: const EdgeInsets.all(8.0),
                     child: ListTile(
                       leading: ImageIcon(
-                        AssetImage('assets/voucher.png'),
+                        const AssetImage('assets/voucher.png'),
                         color: Get.isDarkMode ? Colors.white60 : Colors.black26,
                       ),
                       title: const Text('Voucher'),
@@ -150,7 +147,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationPage(),
+      bottomNavigationBar: const BottomNavigationPage(),
     );
   }
 }

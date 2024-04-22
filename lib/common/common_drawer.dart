@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluxstore/controller/theme_controller.dart';
 import 'package:get/get.dart';
-import '../controller/theme_controller.dart';
 
 class CommonDrawer extends StatefulWidget {
+  const CommonDrawer({super.key});
+
   @override
   State<CommonDrawer> createState() => _CommonDrawerState();
 }
@@ -106,7 +108,7 @@ class _CommonDrawerState extends State<CommonDrawer> {
                 borderRadius: BorderRadius.circular(7.0),
               ),
               padding: const EdgeInsets.fromLTRB(30.0, 20.0, 10.0, 20.0),
-              child: Text(
+              child: const Text(
                 'OTHER',
                 style: TextStyle(fontSize: 20),
               )),

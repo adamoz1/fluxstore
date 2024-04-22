@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:fluxstore/Routes/app_routes.dart';
+import 'package:fluxstore/constants.dart';
 import 'package:fluxstore/controller/login_controller.dart';
 import 'package:get/get.dart';
 
-import '../Routes/app_routes.dart';
-import '../constants.dart';
-
 // ignore: must_be_immutable
-class ForgetPassword extends StatelessWidget {
-  ForgetPassword({super.key});
+class ForgetPassword extends StatefulWidget {
+  const ForgetPassword({super.key});
+
+  @override
+  State<ForgetPassword> createState() => _ForgetPasswordState();
+}
+
+class _ForgetPasswordState extends State<ForgetPassword> {
   late List<Widget> columnData = [];
   TextEditingController email = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    initList(context);
+  }
+
   @override
   Widget build(BuildContext context) {
-    initList(context);
     return Scaffold(
       body: SafeArea(
         child: ListView(children: [
@@ -42,7 +53,7 @@ class ForgetPassword extends StatelessWidget {
         },
         child: Card(
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           color: Constants.whiteColor,
           child: SizedBox(
             height: 40,
@@ -87,7 +98,8 @@ class ForgetPassword extends StatelessWidget {
         child: Center(
           child: ElevatedButton(
             onPressed: () {
-              if (email.text.isNotEmpty && LoginController().validateEmail(email.text)) {
+              if (email.text.isNotEmpty &&
+                  LoginController().validateEmail(email.text)) {
                 Get.toNamed(AppRoute.verification);
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(

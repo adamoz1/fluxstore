@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluxstore/controller/rateapp_controller.dart';
+import 'package:fluxstore/model/AppFeedback.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../model/AppFeedback.dart';
-
 class RateAppPage extends StatefulWidget {
-  const RateAppPage({Key? key}) : super(key: key);
+  const RateAppPage({super.key});
 
   @override
   State<RateAppPage> createState() => _RateAppPageState();
@@ -15,12 +14,6 @@ class RateAppPage extends StatefulWidget {
 
 class _RateAppPageState extends State<RateAppPage> {
   final RateAppController rateAppController = Get.put(RateAppController());
-
-  void clear() {
-    rateAppController.rating.value = 0.0;
-    rateAppController.comment.clear();
-    rateAppController.imagesList = [];
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +43,7 @@ class _RateAppPageState extends State<RateAppPage> {
         child: Column(
           children: [
             const Padding(
-              padding: const EdgeInsets.only(top: 50),
+              padding: EdgeInsets.only(top: 50),
               child: Text(
                 'What is your opinion of GmStore?',
                 style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
@@ -142,7 +135,7 @@ class _RateAppPageState extends State<RateAppPage> {
                     if (rating == 0.0) {
                       // Display error if rating is not provided
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text('Please provide a rating'),
                           backgroundColor: Colors.red,
                         ),
@@ -153,7 +146,7 @@ class _RateAppPageState extends State<RateAppPage> {
                     if (comment.isEmpty) {
                       // Display error if comment is empty
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text('Please enter a comment'),
                           backgroundColor: Colors.red,
                         ),
@@ -184,13 +177,19 @@ class _RateAppPageState extends State<RateAppPage> {
     );
   }
 
+  void clear() {
+    rateAppController.rating.value = 0.0;
+    rateAppController.comment.clear();
+    rateAppController.imagesList = [];
+  }
+
   Future<void> _showDialog() {
     return showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           contentPadding: EdgeInsets.zero, // Ensure content takes up full space
-          content: Container(
+          content: const SizedBox(
             width: 350, // Adjust the width as needed
             height: 250, // Adjust the height as needed
             child: Column(

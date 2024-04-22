@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluxstore/Routes/app_routes.dart';
 import 'package:fluxstore/controller/theme_controller.dart';
+import 'package:fluxstore/others/shared_prefs.dart';
 import 'package:fluxstore/theme.dart';
 import 'package:get/get.dart';
-
-import 'others/shared_prefs.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

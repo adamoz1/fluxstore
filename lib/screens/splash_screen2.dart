@@ -5,7 +5,7 @@ import 'package:fluxstore/others/shared_prefs.dart';
 import 'package:get/get.dart';
 
 class SplashScreen2 extends StatefulWidget {
-  SplashScreen2({super.key});
+  const SplashScreen2({super.key});
 
   @override
   State<SplashScreen2> createState() => _SplashScreen2State();
@@ -14,7 +14,8 @@ class SplashScreen2 extends StatefulWidget {
 class _SplashScreen2State extends State<SplashScreen2>
     with TickerProviderStateMixin {
   PageController controller = PageController();
-  late TabController _tabController = TabController(length: 3, vsync: this);
+  late final TabController _tabController =
+      TabController(length: 3, vsync: this);
 
   @override
   Widget build(BuildContext context) {

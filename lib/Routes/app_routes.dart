@@ -1,22 +1,23 @@
 import 'package:fluxstore/screens/discover_page.dart';
+import 'package:fluxstore/screens/forgot_password.dart';
 import 'package:fluxstore/screens/home_sreen.dart';
+import 'package:fluxstore/screens/new_password.dart';
 import 'package:fluxstore/screens/notification_page.dart';
 import 'package:fluxstore/screens/order_page.dart';
+import 'package:fluxstore/screens/profile_page.dart';
 import 'package:fluxstore/screens/profile_setting.dart';
 import 'package:fluxstore/screens/rate_app_page.dart';
 import 'package:fluxstore/screens/rate_pro_page.dart';
 import 'package:fluxstore/screens/setting_page.dart';
 import 'package:fluxstore/screens/settings_notification.dart';
+import 'package:fluxstore/screens/signin.dart';
+import 'package:fluxstore/screens/signup.dart';
 import 'package:fluxstore/screens/splash_screen1.dart';
+import 'package:fluxstore/screens/splash_screen2.dart';
+import 'package:fluxstore/screens/verification.dart';
 import 'package:fluxstore/screens/voucher_screen.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import '../screens/forgot_password.dart';
-import '../screens/new_password.dart';
-import '../screens/profile_page.dart';
-import '../screens/signin.dart';
-import '../screens/signup.dart';
-import '../screens/splash_screen2.dart';
-import '../screens/verification.dart';
+import 'package:get/get_navigation/src/routes/transitions_type.dart';
 
 class AppRoute {
   static String homePage = '/homepage';
@@ -39,23 +40,35 @@ class AppRoute {
   static String profileSetting = '/profileSetting';
 
   static final appRoute = [
-    GetPage(name: homePage, page: () => const HomePage()),
+    GetPage(
+        name: homePage,
+        page: () => const HomePage(),
+        transition: Transition.fadeIn),
     GetPage(name: notificationPage, page: () => const NotificationPage()),
-    GetPage(name: profilePage, page: () => const ProfilePage()),
+    GetPage(
+        name: profilePage,
+        page: () => const ProfilePage(),
+        transition: Transition.fadeIn),
     GetPage(name: splashScreen1, page: () => const SplashScreen1()),
-    GetPage(name: splashScreen2, page: () => SplashScreen2()),
+    GetPage(name: splashScreen2, page: () => const SplashScreen2()),
     GetPage(name: signin, page: () => Signin()),
-    GetPage(name: signup, page: () => Signup()),
-    GetPage(name: orderPage, page: () => const OrderPage()),
-    GetPage(name: discoverPage, page: () => const DiscoverPage()),
+    GetPage(name: signup, page: () => const Signup()),
+    GetPage(
+        name: orderPage,
+        page: () => const OrderPage(),
+        transition: Transition.fadeIn),
+    GetPage(
+        name: discoverPage,
+        page: () => const DiscoverPage(),
+        transition: Transition.fadeIn),
     GetPage(name: voucherPage, page: () => const VoucherPage()),
     GetPage(name: settingPage, page: () => const SettingPage()),
-    GetPage(name: forgetPassword, page: () => ForgetPassword()),
+    GetPage(name: forgetPassword, page: () => const ForgetPassword()),
     GetPage(
         name: notificationPage, page: () => const NotificationSettingPage()),
     GetPage(name: rateApp, page: () => const RateAppPage()),
     GetPage(name: verification, page: () => Verification()),
-    GetPage(name: newPassword, page: () => NewPassword()),
+    GetPage(name: newPassword, page: () => const NewPassword()),
     GetPage(name: rateProduct, page: () => const RateProduct()),
     GetPage(name: profileSetting, page: () => const ProfileSetting()),
   ];

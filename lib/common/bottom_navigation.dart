@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluxstore/controller/bottomnavigation_coontroller.dart';
 import 'package:fluxstore/controller/theme_controller.dart';
 import 'package:get/get.dart';
 
-import '../controller/bottomnavigation_coontroller.dart';
-
 class BottomNavigationPage extends StatefulWidget {
-  const BottomNavigationPage({Key? key}) : super(key: key);
+  const BottomNavigationPage({super.key});
 
   @override
   State<BottomNavigationPage> createState() => _BottomNavigationPageState();
@@ -54,20 +53,20 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
           showUnselectedLabels: false,
           elevation:
               0.0, // Set elevation to 0 as it's already provided by BoxDecoration
-          items: [
-            const BottomNavigationBarItem(
+          items: const [
+            BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined, size: 30),
               label: '',
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(Icons.search, size: 30),
               label: '',
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(Icons.shopping_bag_outlined, size: 30),
               label: '',
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(Icons.person_outline_outlined, size: 30),
               label: '',
             ),
