@@ -184,21 +184,11 @@ class Verification extends StatelessWidget {
                     : Constants.whiteColor,
               ),
               onChanged: (String value) {
-                print("Onchange is called --$value--");
-                // var value = tf1.text;
-                if (value.length == 1) {
-                  if (tf1.text.length == 1) {
-                    tf2.text = value;
-                    FocusScope.of(context).requestFocus(focusNode2);
-                  } else {
-                    tf1.text = value;
-                  }
-                  focusNode1.unfocus();
-                } else if (value == "") {
-                  tf1.clear();
-                  FocusScope.of(context).requestFocus(focusNode1);
+                if (value.isEmpty) {
+                  return;
                 }
-                print(value);
+                tf1.text = value[value.length - 1];
+                FocusScope.of(context).requestFocus(focusNode2);
               },
             ),
           ),
@@ -236,18 +226,12 @@ class Verification extends StatelessWidget {
                     : Constants.whiteColor,
               ),
               onChanged: (String value) {
-                if (value.length == 1) {
-                  if (tf2.text.length == 1) {
-                    tf3.text = value;
-                    FocusScope.of(context).requestFocus(focusNode3);
-                  } else {
-                    tf2.text = value;
-                  }
-                  focusNode1.unfocus();
-                } else if (value == "") {
-                  tf2.clear();
+                if (value.isEmpty) {
                   FocusScope.of(context).requestFocus(focusNode1);
+                  return;
                 }
+                tf2.text = value[value.length - 1];
+                FocusScope.of(context).requestFocus(focusNode3);
               },
             ),
           ),
@@ -261,6 +245,7 @@ class Verification extends StatelessWidget {
               textAlign: TextAlign.center,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
+                counter: null,
                 hintStyle: const TextStyle(fontSize: 16),
                 focusColor: Constants.blackColor,
                 border: OutlineInputBorder(
@@ -285,16 +270,12 @@ class Verification extends StatelessWidget {
                     : Constants.whiteColor,
               ),
               onChanged: (String value) {
-                if (value.length == 1) {
-                  focusNode3.unfocus();
-                  FocusScope.of(context).requestFocus(focusNode4);
-                } else if (value.length > 1) {
-                  FocusScope.of(context).requestFocus(focusNode4);
-                  tf4.text = value[1];
-                } else if (value == "") {
-                  focusNode3.unfocus();
+                if (value.isEmpty) {
                   FocusScope.of(context).requestFocus(focusNode2);
+                  return;
                 }
+                tf3.text = value[value.length - 1];
+                FocusScope.of(context).requestFocus(focusNode4);
               },
             ),
           ),
@@ -332,15 +313,12 @@ class Verification extends StatelessWidget {
                     : Constants.whiteColor,
               ),
               onChanged: (String value) {
-                if (value.length == 1) {
-                  focusNode4.unfocus();
-                  // FocusScope.of(context).requestFocus(focusNode2);
-                } else if (value.length > 1) {
-                  tf4.text = value[1];
-                } else if (value == "") {
-                  focusNode4.unfocus();
+                if (value.isEmpty) {
                   FocusScope.of(context).requestFocus(focusNode3);
+                  return;
                 }
+                tf4.text = value[value.length - 1];
+                focusNode4.unfocus();
               },
             ),
           ),

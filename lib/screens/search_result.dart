@@ -100,21 +100,21 @@ class _SearchResultState extends State<SearchResult> {
       String value = list[i].clothType ?? "";
       value = value.toLowerCase();
       print("Value is --$value--");
-      if (value.contains(userSearch)) {
+      if (value.contains(userSearch.toLowerCase())) {
         productList.add(list[i]);
       }
     }
     list = productController.popularThisWeek;
     for (int i = 0; i < list.length; i++) {
       String value = list[i].clothType ?? "";
-      if (value.contains(userSearch)) {
+      if (value.contains(userSearch.toLowerCase())) {
         productList.add(list[i]);
       }
     }
     list = productController.similarProduct;
     for (int i = 0; i < list.length; i++) {
       String value = list[i].clothType ?? "";
-      if (value.contains(userSearch)) {
+      if (value.contains(userSearch.toLowerCase())) {
         productList.add(list[i]);
       }
     }
