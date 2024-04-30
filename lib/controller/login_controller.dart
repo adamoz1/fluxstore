@@ -1,3 +1,10 @@
+/* 
+Written by: Adarsh Patel
+Modified At: 22-04-24
+Description: Login Controller is used help
+with login and registration logic.
+*/
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluxstore/others/shared_prefs.dart';
 
@@ -8,36 +15,13 @@ class LoginController {
     sharedPreferences = SharedPrefs.sharedPreferences;
   }
 
-  bool register(String username, String password) {
-    if (password.isNotEmpty && username.isNotEmpty) {
-      return true;
-    }
-    return false;
-  }
-
-  Map<String, dynamic> canLogin(String email, String password) {
-    Map<String, dynamic> response = {"status": 1, "message": "Done Login"};
-    var validate;
+  canLogin() {
     try {
-      validate = validateEmail(email);
       SharedPreferences instance = SharedPrefs.sharedPreferences;
       instance.setString("isLogin", "true");
     } catch (e) {
-      return response;
+      print(e);
     }
-
-    if (!validate) {
-      response["status"] = 0;
-      response["message"] = "Fill Proper Email";
-      return response;
-    }
-
-    if (!password.isNotEmpty) {
-      response["status"] = 0;
-      response["message"] = "Fill Proper Password";
-      return response;
-    }
-    return response;
   }
 
   bool validateEmail(String email) {

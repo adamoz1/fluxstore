@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:fluxstore/Common/common_drawer.dart';
 import 'package:fluxstore/Routes/app_routes.dart';
 import 'package:fluxstore/common/bottom_navigation.dart';
@@ -17,13 +18,15 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   var productController = Get.put(ProductController());
-  var themeController = Get.put(ThemeController());
+  var themeController = Get.find<ThemeController>();
   var categorySelectedName = "Women".obs;
   @override
   Widget build(BuildContext context) {
+    print(themeController.isDarkMode.value);
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
+        scrolledUnderElevation: 0.0,
         leading: IconButton(
             icon: const ImageIcon(
               AssetImage('assets/drawer_icon.png'),
@@ -62,7 +65,7 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      drawer: CommonDrawer(),
+      drawer: const CommonDrawer(),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 15.0),
         child: ListView(
@@ -77,10 +80,11 @@ class _HomePageState extends State<HomePage> {
             recommandedListTile(),
             categoryTitle("Top Collection"),
             topCollectionList(),
+            verticalCollectionCards()
           ],
         ),
       ),
-      bottomNavigationBar: const BottomNavigationPage(),
+      bottomNavigationBar: BottomNavigationPage(),
     );
   }
 
@@ -194,16 +198,16 @@ class _HomePageState extends State<HomePage> {
   autumnCollection() {
     return Padding(
       padding:
-          const EdgeInsets.only(top: 30.0, bottom: 45, left: 30, right: 30),
+          const EdgeInsets.only(top: 30.0, bottom: 30, left: 30, right: 30),
       child: InkWell(
         onTap: () {},
         child: Stack(children: [
           Container(
-              height: MediaQuery.of(context).size.height / 4,
+              height: 215,
               width: double.infinity,
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                  image: DecorationImage(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  image: const DecorationImage(
                       image: AssetImage('assets/autumn_collection.jpg'),
                       fit: BoxFit.fitWidth))),
           Padding(
@@ -251,47 +255,57 @@ class _HomePageState extends State<HomePage> {
 
   featureProduct() {
     return Container(
-      padding: const EdgeInsets.only(top: 20, left: 30),
+      padding: const EdgeInsets.only(top: 20),
       width: MediaQuery.of(context).size.width - 100,
-      height: MediaQuery.of(context).size.height / 2.5,
+      height: 330,
       child: ListView.builder(
         itemCount: productController.productList.length,
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.only(right: 15.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: 230,
-                  width: 200,
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(30)),
-                      image: DecorationImage(
-                          image: AssetImage(
-                              productController.productList[index].imagePath ??
-                                  ""),
-                          fit: BoxFit.fill)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Text(
-                    productController.productList[index].name ?? "Error",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w700, fontSize: 18),
+            padding: const EdgeInsets.only(left: 30.0),
+            child: InkWell(
+              onTap: () {
+                Get.toNamed(AppRoute.productDetail, arguments: [
+                  productController.productList[index],
+                  index,
+                  "productController"
+                ]);
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 200,
+                    width: 165,
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(15)),
+                        image: DecorationImage(
+                            image: AssetImage(productController
+                                    .productList[index].imagePath ??
+                                ""),
+                            fit: BoxFit.fill)),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Text(
-                    "\$ ${productController.productList[index].price ?? 0}",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w700, fontSize: 18),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Text(
+                      productController.productList[index].name ?? "Error",
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 14),
+                    ),
                   ),
-                )
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 1.0),
+                    child: Text(
+                      "\$ ${productController.productList[index].price ?? 0}",
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w700, fontSize: 18),
+                    ),
+                  )
+                ],
+              ),
             ),
           );
         },
@@ -392,7 +406,7 @@ class _HomePageState extends State<HomePage> {
     return Obx(() {
       var theme = themeController.isDarkMode.value;
       return Container(
-        padding: const EdgeInsets.only(top: 30, left: 30, bottom: 30),
+        padding: const EdgeInsets.only(top: 30, bottom: 30),
         height: 150,
         width: double.infinity,
         child: ListView.builder(
@@ -401,7 +415,7 @@ class _HomePageState extends State<HomePage> {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.only(right: 30.0),
+                padding: const EdgeInsets.only(left: 30.0),
                 child: Stack(
                   children: [
                     Container(
@@ -461,7 +475,7 @@ class _HomePageState extends State<HomePage> {
     var firstTitle = "FOR SLIM\n& BEAUTY";
     var secondTitle = "Most sexy\n& fabulous\ndesign";
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 30.0),
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Column(
         children: [
           Padding(
@@ -489,7 +503,7 @@ class _HomePageState extends State<HomePage> {
       var theme = themeController.isDarkMode.value;
       return Container(
         height: cardHeight,
-        margin: const EdgeInsets.only(bottom: 40),
+        margin: const EdgeInsets.only(bottom: 20),
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
@@ -499,13 +513,13 @@ class _HomePageState extends State<HomePage> {
         ),
         child: Stack(
           children: [
-            Expanded(
-              child: Container(),
-            ),
+            // Expanded(
+            //   child: Container(),
+            // ),
             Container(
               alignment: Alignment.centerRight,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                padding: const EdgeInsets.only(left: 4.0, right: 2),
                 child: Stack(
                   alignment: Alignment.centerRight,
                   children: [
@@ -562,6 +576,132 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+          ],
+        ),
+      );
+    });
+  }
+
+  verticalCollectionCards() {
+    return Obx(() {
+      var theme = themeController.isDarkMode.value;
+      return Container(
+        padding: const EdgeInsets.only(left: 30, right: 30, bottom: 10),
+        child: Row(
+          children: [
+            Expanded(
+                child: Container(
+              decoration: BoxDecoration(
+                color: theme
+                    ? Constants.topCollectionCardColorDM
+                    : Constants.topCollectionCardColor,
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              child: Stack(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width / 5,
+                    height: 250,
+                    alignment: Alignment.centerLeft,
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage("assets/tshirt_office_light.png"),
+                            fit: BoxFit.cover)),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(child: Container()),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 16.0),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 40.0, left: 16),
+                              child: Text(
+                                "T-Shirts",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: theme
+                                        ? Constants
+                                            .topCollectionMainTextColor1DM
+                                        : Constants
+                                            .topCollectionMainTextColor1),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 15.0, left: 16),
+                              child: Text(
+                                "The\nOffice\nLife",
+                                style: TextStyle(
+                                    fontSize: 19,
+                                    color: theme
+                                        ? Constants
+                                            .topCollectionMainTextColor2DM
+                                        : Constants
+                                            .topCollectionMainTextColor2),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )),
+            const SizedBox(
+              width: 20,
+            ),
+            Expanded(
+                child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: theme
+                    ? Constants.topCollectionCardColorDM
+                    : Constants.topCollectionCardColor,
+              ),
+              child: Stack(
+                children: [
+                  Container(
+                    height: 250,
+                    alignment: Alignment.centerRight,
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image:
+                                AssetImage("assets/dress_eligant_design.png"),
+                            fit: BoxFit.cover)),
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40.0, left: 16),
+                        child: Text(
+                          "Dresses",
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: theme
+                                  ? Constants.topCollectionMainTextColor1DM
+                                  : Constants.topCollectionMainTextColor1),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15.0, left: 16),
+                        child: Text(
+                          "Elegant\nDesign",
+                          style: TextStyle(
+                              fontSize: 19,
+                              color: theme
+                                  ? Constants.topCollectionMainTextColor2DM
+                                  : Constants.topCollectionMainTextColor2),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            )),
           ],
         ),
       );

@@ -1,3 +1,5 @@
+// Common Drawer is used by mutiple page to navigate.
+
 import 'package:flutter/material.dart';
 import 'package:fluxstore/controller/theme_controller.dart';
 import 'package:get/get.dart';
@@ -10,7 +12,7 @@ class CommonDrawer extends StatefulWidget {
 }
 
 class _CommonDrawerState extends State<CommonDrawer> {
-  final ThemeController themeController = Get.put(ThemeController());
+  final ThemeController themeController = Get.find<ThemeController>();
   @override
   Widget build(BuildContext context) {
     return Drawer(

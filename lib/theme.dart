@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluxstore/constants.dart';
 
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
@@ -17,6 +18,8 @@ ThemeData darkTheme = ThemeData(
   textTheme: const TextTheme(bodyText1: TextStyle(color: Colors.white)),
   fontFamily: "ProductSans",
   iconTheme: const IconThemeData(color: Colors.white),
+  scaffoldBackgroundColor: Constants.blackColor,
+  appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     selectedItemColor: Colors.white, // Icon color for dark theme
     unselectedItemColor: Colors.white54,

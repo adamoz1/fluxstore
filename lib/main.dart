@@ -8,10 +8,9 @@ import 'package:get/get.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefs.initializeSharedPrefs();
+  Get.put(ThemeController());
   runApp(const MainApp());
 }
-
-class ProductController {}
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});

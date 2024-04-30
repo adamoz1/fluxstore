@@ -20,23 +20,25 @@ class _SplashScreen2State extends State<SplashScreen2>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Container(
-              height: double.infinity,
-              width: double.infinity,
-              color: Constants.splashGreyColor,
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height / 1.7,
-              width: double.infinity,
-              color: Constants.whiteColor,
-            ),
-            contentOver(context),
-          ],
-        ),
-      ),
+      body: Obx(() {
+        return SafeArea(
+          child: Stack(
+            children: [
+              Container(
+                height: double.infinity,
+                width: double.infinity,
+                color: Constants.splashGreyColor,
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height / 1.7,
+                width: double.infinity,
+                color: Constants.whiteColor,
+              ),
+              contentOver(context),
+            ],
+          ),
+        );
+      }),
     );
   }
 
@@ -104,9 +106,12 @@ class _SplashScreen2State extends State<SplashScreen2>
           padding: const EdgeInsets.only(bottom: 40.0, top: 10),
           child: ElevatedButton(
             onPressed: () {
-              SharedPrefs.sharedPreferences
-                  .setString("seenLandingPage", "true");
-              Get.offAllNamed(AppRoute.signup);
+              if (controller.page == 3) {
+                print("Current page is ${controller.page}");
+              }
+              // SharedPrefs.sharedPreferences
+              //     .setString("seenLandingPage", "true");
+              // Get.offAllNamed(AppRoute.signup);
             },
             style: ElevatedButton.styleFrom(
                 backgroundColor:

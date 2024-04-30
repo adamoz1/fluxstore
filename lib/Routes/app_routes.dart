@@ -1,19 +1,30 @@
+/* 
+Written by: Adarsh Patel
+Modified At: 22-04-24
+Description: Contains route names of the system
+with list of routes returned to GetMaterialApp at 
+the main.dart.
+*/
+
 import 'package:fluxstore/screens/discover_page.dart';
+import 'package:fluxstore/screens/discover_search_page.dart';
 import 'package:fluxstore/screens/forgot_password.dart';
 import 'package:fluxstore/screens/home_sreen.dart';
 import 'package:fluxstore/screens/new_password.dart';
 import 'package:fluxstore/screens/notification_page.dart';
+import 'package:fluxstore/screens/onboarding_screen.dart';
 import 'package:fluxstore/screens/order_page.dart';
+import 'package:fluxstore/screens/product_detail.dart';
 import 'package:fluxstore/screens/profile_page.dart';
 import 'package:fluxstore/screens/profile_setting.dart';
 import 'package:fluxstore/screens/rate_app_page.dart';
 import 'package:fluxstore/screens/rate_pro_page.dart';
+import 'package:fluxstore/screens/search_result.dart';
 import 'package:fluxstore/screens/setting_page.dart';
 import 'package:fluxstore/screens/settings_notification.dart';
 import 'package:fluxstore/screens/signin.dart';
 import 'package:fluxstore/screens/signup.dart';
 import 'package:fluxstore/screens/splash_screen1.dart';
-import 'package:fluxstore/screens/splash_screen2.dart';
 import 'package:fluxstore/screens/verification.dart';
 import 'package:fluxstore/screens/voucher_screen.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
@@ -24,7 +35,7 @@ class AppRoute {
   static String notificationPage = '/notification';
   static String profilePage = '/profile';
   static String splashScreen1 = '/splash1';
-  static String splashScreen2 = '/splash2';
+  static String onboardingPage = '/onboarding';
   static String signin = '/signin';
   static String signup = '/signup';
   static String orderPage = '/orderpage';
@@ -38,6 +49,9 @@ class AppRoute {
   static String forgetPassword = '/forgetpassword';
   static String rateProduct = '/ratePro';
   static String profileSetting = '/profileSetting';
+  static String searchProduct = '/searchProduct';
+  static String productDetail = '/productDetail';
+  static String searchResult = '/searchResult';
 
   static final appRoute = [
     GetPage(
@@ -50,7 +64,7 @@ class AppRoute {
         page: () => const ProfilePage(),
         transition: Transition.fadeIn),
     GetPage(name: splashScreen1, page: () => const SplashScreen1()),
-    GetPage(name: splashScreen2, page: () => const SplashScreen2()),
+    GetPage(name: onboardingPage, page: () => const OnboardingScreen()),
     GetPage(name: signin, page: () => Signin()),
     GetPage(name: signup, page: () => const Signup()),
     GetPage(
@@ -71,5 +85,8 @@ class AppRoute {
     GetPage(name: newPassword, page: () => const NewPassword()),
     GetPage(name: rateProduct, page: () => const RateProduct()),
     GetPage(name: profileSetting, page: () => const ProfileSetting()),
+    GetPage(name: searchProduct, page: () => const DiscoverSearchPage()),
+    GetPage(name: productDetail, page: () => const ProductDetail()),
+    GetPage(name: searchResult, page: () => const SearchResult()),
   ];
 }

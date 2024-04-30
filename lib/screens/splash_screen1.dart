@@ -1,3 +1,10 @@
+/* 
+Written by: Adarsh Patel
+Modified At: 22-04-24
+Description: Following file has the design of 
+splash screen page.
+*/
+
 import 'package:flutter/material.dart';
 import 'package:fluxstore/Routes/app_routes.dart';
 import 'package:fluxstore/constants.dart';
@@ -27,7 +34,7 @@ class SplashScreen1 extends StatelessWidget {
           Column(
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height / 1.7,
+                height: MediaQuery.of(context).size.height / 1.55,
               ),
               Center(
                   child: Text(
@@ -47,10 +54,10 @@ class SplashScreen1 extends StatelessWidget {
               )),
               Expanded(child: Container()),
               Padding(
-                padding: const EdgeInsets.only(bottom: 40.0),
+                padding: const EdgeInsets.only(bottom: 100.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.toNamed(AppRoute.splashScreen2);
+                    Get.toNamed(AppRoute.onboardingPage);
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor:

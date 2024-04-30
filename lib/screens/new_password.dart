@@ -1,3 +1,11 @@
+/* 
+Written by: Adarsh Patel
+Modified At: 22-04-24
+Description: Following file has the design of 
+new-password page after authenticating user
+through forget-password.
+*/
+
 import 'package:flutter/material.dart';
 import 'package:fluxstore/Routes/app_routes.dart';
 import 'package:fluxstore/constants.dart';
@@ -12,7 +20,6 @@ class NewPassword extends StatefulWidget {
 }
 
 class _NewPasswordState extends State<NewPassword> {
-  late List<Widget> columnData = [];
   TextEditingController pass = TextEditingController();
   TextEditingController confipass = TextEditingController();
   bool tf1Visible = false;
@@ -21,7 +28,6 @@ class _NewPasswordState extends State<NewPassword> {
   @override
   void initState() {
     super.initState();
-    initList(context);
   }
 
   @override
@@ -35,7 +41,7 @@ class _NewPasswordState extends State<NewPassword> {
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: columnData,
+                children: initList(context),
               ),
             ),
           ),
@@ -44,8 +50,9 @@ class _NewPasswordState extends State<NewPassword> {
     );
   }
 
-  void initList(context) {
-    columnData = [
+  //Initialize list data with widget to be assigned to column.
+  initList(context) {
+    return [
       const SizedBox(
         height: 10,
       ),
@@ -93,10 +100,27 @@ class _NewPasswordState extends State<NewPassword> {
             controller: pass,
             decoration: InputDecoration(
                 hintText: "New Password",
+                hintStyle: TextStyle(
+                    color: Constants.blackColor, fontWeight: FontWeight.w100),
+                border: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Constants.signupInputBorderColor, width: 1),
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Constants.signupInputBorderColor, width: 1),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Constants.focusedSignupInputBorderColor,
+                        width: 1)),
                 suffixIcon: IconButton(
                     onPressed: () {
-                      tf1Visible = !tf1Visible;
-                      setState(() {});
+                      print("Called");
+
+                      setState(() {
+                        tf1Visible = !tf1Visible;
+                      });
                     },
                     icon: Icon(!tf1Visible
                         ? Icons.visibility
@@ -109,8 +133,23 @@ class _NewPasswordState extends State<NewPassword> {
             controller: confipass,
             decoration: InputDecoration(
                 hintText: "Confirm Password",
+                hintStyle: TextStyle(
+                    color: Constants.blackColor, fontWeight: FontWeight.w100),
+                border: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Constants.signupInputBorderColor, width: 1),
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Constants.signupInputBorderColor, width: 1),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Constants.focusedSignupInputBorderColor,
+                        width: 1)),
                 suffixIcon: IconButton(
                     onPressed: () {
+                      print("Called");
                       tf2Visible = !tf2Visible;
                       setState(() {});
                     },

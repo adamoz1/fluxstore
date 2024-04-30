@@ -1,3 +1,9 @@
+/* 
+Written by: Adarsh Patel
+Modified At: 22-04-24
+Description: Product Model of related fields.
+*/
+
 class ProductModel {
   String? name;
   String? description;
@@ -5,16 +11,16 @@ class ProductModel {
   String? imagePath;
   String? gender;
   String? category;
+  String? clothType;
   bool? favoriate;
 
   ProductModel(
-      String n, String d, double p, String i, String g, String c, bool f) {
-    name = n;
-    description = d;
-    price = p;
-    imagePath = i;
-    gender = g;
-    category = c;
-    favoriate = f;
-  }
+      String this.name,
+      String this.description,
+      double this.price,
+      String this.imagePath,
+      String this.gender,
+      String this.category,
+      String this.clothType,
+      bool this.favoriate);
 }

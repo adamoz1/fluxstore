@@ -1,7 +1,15 @@
+/* 
+Written by: Adarsh Patel
+Modified At: 22-04-24
+Description: Following file has the design of 
+signup page.
+*/
+
 import 'package:flutter/material.dart';
 import 'package:fluxstore/Routes/app_routes.dart';
 import 'package:fluxstore/constants.dart';
 import 'package:fluxstore/controller/login_controller.dart';
+import 'package:fluxstore/controller/theme_controller.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
@@ -14,7 +22,8 @@ class Signup extends StatefulWidget {
 
 class _SignupState extends State<Signup> {
   late List<Widget> columnData = [];
-
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  ThemeController themeController = Get.find<ThemeController>();
   @override
   void initState() {
     super.initState();
@@ -24,7 +33,7 @@ class _SignupState extends State<Signup> {
   TextEditingController name = TextEditingController();
   TextEditingController address = TextEditingController();
   TextEditingController password = TextEditingController();
-  TextEditingController confirmpasswordword = TextEditingController();
+  TextEditingController confirmPassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -65,55 +74,76 @@ class _SignupState extends State<Signup> {
       const SizedBox(
         height: 15,
       ),
-      textFieldControl("Enter your name", name),
-      textFieldControl("Enter address", address),
-      textFieldControl("passwordword", password),
-      textFieldControl("Confirm passwordword", confirmpasswordword),
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15),
-        child: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              if (password.text == confirmpasswordword.text) {
-                LoginController controller = LoginController();
-                if (controller.register(name.text, password.text) &&
-                    address.text.isNotEmpty) {
-                  Get.offAllNamed(AppRoute.signin);
-                } else {
-                  if (LoginController().validateEmail(address.text)) {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("Fill Proper Email Address")));
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("Fill Every Field Information")));
-                  }
+      Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              textFieldControl("Enter your name", name, (value) {
+                if (value == null || value == "") {
+                  return "This field is required";
                 }
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar((const SnackBar(
-                    content: Text(
-                        "passwordword and Confirm passwordword are not same!!!"))));
-              }
-            },
-            style: ElevatedButton.styleFrom(
-                backgroundColor: Constants.buttonBrownColor,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.elliptical(
-                        Constants.buttonBorderRadius,
-                        Constants.buttonBorderRadius)),
-                    side: BorderSide(color: Constants.whiteColor, width: 2))),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-              child: Text(
-                "SIGN UP",
-                style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    color: Constants.whiteColor,
-                    fontSize: 18),
+                return null;
+              }, false),
+              textFieldControl("Enter address", address, (value) {
+                if (value == null || value == "") {
+                  return "This field is required";
+                }
+                if (!RegExp(
+                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                    .hasMatch(value)) {
+                  return "Invalid Email Format, Pls Retry";
+                }
+                return null;
+              }, false),
+              textFieldControl("password", password, (value) {
+                if (value == null || value == "") {
+                  return "This field is required";
+                }
+                return null;
+              }, true),
+              textFieldControl("Confirm password", confirmPassword, (value) {
+                if (value == null || value == "") {
+                  return "This field is required";
+                }
+                if (password.value.text != confirmPassword.value.text) {
+                  return "Password and Confirm Password are not same!";
+                }
+                return null;
+              }, true),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                child: Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        LoginController().canLogin();
+                        Get.offAndToNamed(AppRoute.homePage);
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Constants.buttonBrownColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.elliptical(
+                                Constants.buttonBorderRadius,
+                                Constants.buttonBorderRadius)),
+                            side: BorderSide(
+                                color: Constants.buttonBrownColor, width: 2))),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 15),
+                      child: Text(
+                        "SIGN UP",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: Constants.whiteColor,
+                            fontSize: 18),
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
-      ),
+            ],
+          )),
       const Padding(
           padding: EdgeInsets.symmetric(vertical: 15),
           child: Center(
@@ -175,10 +205,12 @@ class _SignupState extends State<Signup> {
                 splashFactory: NoSplash.splashFactory,
               ),
               child: Text(
-                "Login In",
+                "Log In",
                 style: TextStyle(
                     decoration: TextDecoration.underline,
-                    color: Constants.blackColor),
+                    color: themeController.isDarkMode.value
+                        ? Constants.whiteColor
+                        : Constants.blackColor),
               )),
         ],
       ),
@@ -189,12 +221,31 @@ class _SignupState extends State<Signup> {
   }
 
   // This method return custom textfield setting hints and controller.
-  textFieldControl(hintWords, controller) {
+  textFieldControl(hintWords, controller, validatorFunction, obsecureField) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15),
-      child: TextField(
-        decoration: InputDecoration(hintText: hintWords),
+      child: TextFormField(
+        obscureText: obsecureField,
+        decoration: InputDecoration(
+          hintText: hintWords,
+          hintStyle: TextStyle(
+              color: themeController.isDarkMode.value
+                  ? Constants.whiteColor
+                  : Constants.blackColor),
+          border: UnderlineInputBorder(
+            borderSide:
+                BorderSide(color: Constants.signupInputBorderColor, width: 1),
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide:
+                BorderSide(color: Constants.signupInputBorderColor, width: 1),
+          ),
+          focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Constants.focusedSignupInputBorderColor, width: 2)),
+        ),
         controller: controller,
+        validator: validatorFunction,
       ),
     );
   }

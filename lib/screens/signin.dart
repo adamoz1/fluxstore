@@ -1,20 +1,39 @@
+/* 
+Written by: Adarsh Patel
+Modified At: 22-04-24
+Description: Following file has the design of 
+signin page.
+*/
+
 import 'package:flutter/material.dart';
 import 'package:fluxstore/Routes/app_routes.dart';
 import 'package:fluxstore/constants.dart';
 import 'package:fluxstore/controller/login_controller.dart';
+import 'package:fluxstore/controller/theme_controller.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
-class Signin extends StatelessWidget {
+class Signin extends StatefulWidget {
   Signin({super.key});
 
+  @override
+  State<Signin> createState() => _SigninState();
+}
+
+class _SigninState extends State<Signin> {
   late List<Widget> columnData = [];
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController address = TextEditingController();
+  ThemeController themeController = Get.find<ThemeController>();
   TextEditingController pass = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    initList();
+  }
 
   @override
   Widget build(BuildContext context) {
-    initList(context);
     return Scaffold(
       body: ListView(shrinkWrap: true, children: [
         SizedBox(
@@ -34,7 +53,8 @@ class Signin extends StatelessWidget {
     );
   }
 
-  initList(context) {
+  //Initialize list data with widget to be assigned to column.
+  initList() {
     columnData = [
       const Padding(
         padding: EdgeInsets.only(bottom: 15),
@@ -50,21 +70,87 @@ class Signin extends StatelessWidget {
       const SizedBox(
         height: 15,
       ),
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15),
-        child: TextField(
-          decoration: const InputDecoration(hintText: "Enter address"),
-          controller: address,
-          keyboardType: TextInputType.emailAddress,
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15),
-        child: TextField(
-          decoration: const InputDecoration(hintText: "Password"),
-          controller: pass,
-        ),
-      ),
+      Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  child: Obx(
+                    () => TextFormField(
+                      decoration: InputDecoration(
+                        hintText: "Enter address",
+                        hintStyle: TextStyle(
+                            color: themeController.isDarkMode.value
+                                ? Constants.whiteColor
+                                : Constants.blackColor),
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Constants.signupInputBorderColor,
+                              width: 1),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Constants.signupInputBorderColor,
+                              width: 1),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Constants.focusedSignupInputBorderColor,
+                                width: 2)),
+                      ),
+                      validator: (value) {
+                        if (value == null || value == "") {
+                          return "This field is required";
+                        }
+                        if (!RegExp(
+                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(value)) {
+                          return "Invalid Email Format, Pls Retry";
+                        }
+                        return null;
+                      },
+                      controller: address,
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                  )),
+              Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  child: Obx(
+                    () => TextFormField(
+                      decoration: InputDecoration(
+                        hintText: "Password",
+                        hintStyle: TextStyle(
+                            color: themeController.isDarkMode.value
+                                ? Constants.whiteColor
+                                : Constants.blackColor),
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Constants.signupInputBorderColor,
+                              width: 1),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Constants.signupInputBorderColor,
+                              width: 1),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Constants.focusedSignupInputBorderColor,
+                                width: 2)),
+                      ),
+                      obscureText: true,
+                      validator: (value) {
+                        if (value == null || value == "") {
+                          return "This field is required";
+                        }
+                        return null;
+                      },
+                      controller: pass,
+                    ),
+                  )),
+            ],
+          )),
       Padding(
         padding: const EdgeInsets.only(bottom: 15),
         child: Container(
@@ -73,12 +159,15 @@ class Signin extends StatelessWidget {
             onTap: () {
               Get.toNamed(AppRoute.forgetPassword);
             },
-            child: Text(
-              "Forgot password?",
-              textAlign: TextAlign.right,
-              style: TextStyle(
-                  color: Constants.blackColor, fontWeight: FontWeight.w100),
-            ),
+            child: Obx(() => Text(
+                  "Forgot password?",
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                      color: themeController.isDarkMode.value
+                          ? Constants.whiteColor
+                          : Constants.blackColor,
+                      fontWeight: FontWeight.w100),
+                )),
           ),
         ),
       ),
@@ -87,22 +176,20 @@ class Signin extends StatelessWidget {
         child: Center(
           child: ElevatedButton(
             onPressed: () {
-              LoginController controller = LoginController();
-              var response = controller.canLogin(address.text, pass.text);
-              if (response["status"] == 1) {
-                Get.toNamed(AppRoute.homePage);
-              } else {
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text(response["message"])));
+              if (_formKey.currentState!.validate()) {
+                LoginController().canLogin();
+                Get.offAndToNamed(AppRoute.homePage);
               }
             },
             style: ElevatedButton.styleFrom(
-                backgroundColor: Constants.buttonBrownColor,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.elliptical(
-                        Constants.buttonBorderRadius,
-                        Constants.buttonBorderRadius)),
-                    side: BorderSide(color: Constants.whiteColor, width: 2))),
+              backgroundColor: Constants.buttonBrownColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.elliptical(
+                    Constants.buttonBorderRadius,
+                    Constants.buttonBorderRadius)),
+                side: BorderSide(color: Constants.buttonBrownColor, width: 2),
+              ),
+            ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
               child: Text(
@@ -176,12 +263,14 @@ class Signin extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 splashFactory: NoSplash.splashFactory,
               ),
-              child: Text(
-                "Sign Up",
-                style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    color: Constants.blackColor),
-              )),
+              child: Obx(() => Text(
+                    "Sign Up",
+                    style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        color: themeController.isDarkMode.value
+                            ? Constants.whiteColor
+                            : Constants.blackColor),
+                  ))),
         ],
       ),
       const SizedBox(

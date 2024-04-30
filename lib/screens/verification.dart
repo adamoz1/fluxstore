@@ -1,6 +1,14 @@
+/* 
+Written by: Adarsh Patel
+Modified At: 22-04-24
+Description: Following file has the design of 
+otp verification after forget-password.
+*/
+
 import 'package:flutter/material.dart';
 import 'package:fluxstore/Routes/app_routes.dart';
 import 'package:fluxstore/constants.dart';
+import 'package:fluxstore/controller/theme_controller.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
@@ -15,6 +23,7 @@ class Verification extends StatelessWidget {
   TextEditingController tf2 = TextEditingController();
   TextEditingController tf3 = TextEditingController();
   TextEditingController tf4 = TextEditingController();
+  ThemeController themeController = Get.find<ThemeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +58,17 @@ class Verification extends StatelessWidget {
         child: Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-          color: Constants.whiteColor,
+          color: themeController.isDarkMode.value
+              ? Constants.blackColor
+              : Constants.whiteColor,
           child: SizedBox(
             height: 40,
             width: 40,
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: Constants.backIconColor,
+              color: themeController.isDarkMode.value
+                  ? Constants.whiteColor
+                  : Constants.blackColor,
               size: 15,
             ),
           ),
@@ -88,27 +101,38 @@ class Verification extends StatelessWidget {
               if (tf1.text.isNotEmpty &&
                   tf2.text.isNotEmpty &&
                   tf3.text.isNotEmpty &&
-                  tf4.text.isNotEmpty) {
+                  tf4.text.isNotEmpty &&
+                  tf1.text.isNum &&
+                  tf2.text.isNum &&
+                  tf3.text.isNum &&
+                  tf4.text.isNum) {
                 Get.toNamed(AppRoute.newPassword);
               } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Enter valid Otp")));
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text("Enter valid Otp"),
+                  duration: Duration(milliseconds: 800),
+                ));
               }
             },
             style: ElevatedButton.styleFrom(
-                backgroundColor: Constants.blackColor,
+                backgroundColor: themeController.isDarkMode.value
+                    ? Constants.whiteColor
+                    : Constants.blackColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.elliptical(
                         Constants.buttonBorderRadius,
                         Constants.buttonBorderRadius)),
-                    side: BorderSide(color: Constants.whiteColor, width: 2))),
+                    side: BorderSide(color: Constants.blackColor, width: 2))),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
               child: Text(
                 "Verify Otp",
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
-                    color: Constants.whiteColor,
+                    color: themeController.isDarkMode.value
+                        ? Constants.blackColor
+                        : Constants.whiteColor,
                     fontSize: 18),
               ),
             ),
@@ -122,151 +146,206 @@ class Verification extends StatelessWidget {
   }
 
   verificationOtp(context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Container(
-          width: 60,
-          height: 60,
-          child: TextField(
-            controller: tf1,
-            focusNode: focusNode1,
-            style: const TextStyle(fontSize: 20),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              hintStyle: const TextStyle(fontSize: 16),
-              focusColor: Constants.blackColor,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
-                borderSide: BorderSide(width: 0, color: Constants.blackColor),
-              ),
-              focusedBorder: OutlineInputBorder(
+    return Obx(
+      () => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Container(
+            width: 60,
+            height: 60,
+            child: TextField(
+              controller: tf1,
+              focusNode: focusNode1,
+              style: const TextStyle(fontSize: 20),
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintStyle: const TextStyle(fontSize: 16),
+                focusColor: Constants.blackColor,
+                border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide(
-                    color: Constants.blackColor,
-                  )),
-              filled: true,
-              contentPadding: const EdgeInsets.all(16),
-              fillColor: Constants.whiteColor,
-            ),
-            onChanged: (String value) {
-              // var value = tf1.text;
-              if (value.length == 1) {
-                focusNode1.unfocus();
-                FocusScope.of(context).requestFocus(focusNode2);
-              } else if (value.length > 1) {
-                tf1.text = value[0];
-              }
-            },
-          ),
-        ),
-        Container(
-          width: 60,
-          height: 60,
-          child: TextField(
-            controller: tf2,
-            focusNode: focusNode2,
-            style: const TextStyle(fontSize: 20),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              hintStyle: const TextStyle(fontSize: 16),
-              focusColor: Constants.blackColor,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
-                borderSide: BorderSide(width: 0, color: Constants.blackColor),
+                      width: 0,
+                      color: themeController.isDarkMode.value
+                          ? Constants.whiteColor
+                          : Constants.blackColor),
+                ),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(
+                      color: themeController.isDarkMode.value
+                          ? Constants.whiteColor
+                          : Constants.blackColor,
+                    )),
+                filled: true,
+                contentPadding: const EdgeInsets.all(16),
+                fillColor: themeController.isDarkMode.value
+                    ? Constants.blackColor
+                    : Constants.whiteColor,
               ),
-              focusedBorder: OutlineInputBorder(
+              onChanged: (String value) {
+                print("Onchange is called --$value--");
+                // var value = tf1.text;
+                if (value.length == 1) {
+                  if (tf1.text.length == 1) {
+                    tf2.text = value;
+                    FocusScope.of(context).requestFocus(focusNode2);
+                  } else {
+                    tf1.text = value;
+                  }
+                  focusNode1.unfocus();
+                } else if (value == "") {
+                  tf1.clear();
+                  FocusScope.of(context).requestFocus(focusNode1);
+                }
+                print(value);
+              },
+            ),
+          ),
+          Container(
+            width: 60,
+            height: 60,
+            child: TextField(
+              controller: tf2,
+              focusNode: focusNode2,
+              style: const TextStyle(fontSize: 20),
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintStyle: const TextStyle(fontSize: 16),
+                focusColor: Constants.blackColor,
+                border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide(
-                    color: Constants.blackColor,
-                  )),
-              filled: true,
-              contentPadding: const EdgeInsets.all(16),
-              fillColor: Constants.whiteColor,
-            ),
-            onChanged: (String value) {
-              if (value.length == 1) {
-                focusNode2.unfocus();
-                FocusScope.of(context).requestFocus(focusNode3);
-              } else if (value.length > 1) {
-                tf2.text = value[0];
-              }
-            },
-          ),
-        ),
-        Container(
-          width: 60,
-          height: 60,
-          child: TextField(
-            controller: tf3,
-            focusNode: focusNode3,
-            style: const TextStyle(fontSize: 20),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              hintStyle: const TextStyle(fontSize: 16),
-              focusColor: Constants.blackColor,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
-                borderSide: BorderSide(width: 0, color: Constants.blackColor),
+                      width: 0,
+                      color: themeController.isDarkMode.value
+                          ? Constants.whiteColor
+                          : Constants.blackColor),
+                ),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(
+                      color: themeController.isDarkMode.value
+                          ? Constants.whiteColor
+                          : Constants.blackColor,
+                    )),
+                filled: true,
+                contentPadding: const EdgeInsets.all(16),
+                fillColor: themeController.isDarkMode.value
+                    ? Constants.blackColor
+                    : Constants.whiteColor,
               ),
-              focusedBorder: OutlineInputBorder(
+              onChanged: (String value) {
+                if (value.length == 1) {
+                  if (tf2.text.length == 1) {
+                    tf3.text = value;
+                    FocusScope.of(context).requestFocus(focusNode3);
+                  } else {
+                    tf2.text = value;
+                  }
+                  focusNode1.unfocus();
+                } else if (value == "") {
+                  tf2.clear();
+                  FocusScope.of(context).requestFocus(focusNode1);
+                }
+              },
+            ),
+          ),
+          Container(
+            width: 60,
+            height: 60,
+            child: TextField(
+              controller: tf3,
+              focusNode: focusNode3,
+              style: const TextStyle(fontSize: 20),
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintStyle: const TextStyle(fontSize: 16),
+                focusColor: Constants.blackColor,
+                border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide(
-                    color: Constants.blackColor,
-                  )),
-              filled: true,
-              contentPadding: const EdgeInsets.all(16),
-              fillColor: Constants.whiteColor,
-            ),
-            onChanged: (String value) {
-              if (value.length == 1) {
-                focusNode3.unfocus();
-                FocusScope.of(context).requestFocus(focusNode4);
-              } else if (value.length > 1) {
-                tf3.text = value[0];
-              }
-            },
-          ),
-        ),
-        Container(
-          width: 60,
-          height: 60,
-          child: TextField(
-            controller: tf4,
-            focusNode: focusNode4,
-            style: const TextStyle(fontSize: 20),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              hintStyle: const TextStyle(fontSize: 16),
-              focusColor: Constants.blackColor,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
-                borderSide: BorderSide(width: 0, color: Constants.blackColor),
+                      width: 0,
+                      color: themeController.isDarkMode.value
+                          ? Constants.whiteColor
+                          : Constants.blackColor),
+                ),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(
+                      color: themeController.isDarkMode.value
+                          ? Constants.whiteColor
+                          : Constants.blackColor,
+                    )),
+                filled: true,
+                contentPadding: const EdgeInsets.all(16),
+                fillColor: themeController.isDarkMode.value
+                    ? Constants.blackColor
+                    : Constants.whiteColor,
               ),
-              focusedBorder: OutlineInputBorder(
+              onChanged: (String value) {
+                if (value.length == 1) {
+                  focusNode3.unfocus();
+                  FocusScope.of(context).requestFocus(focusNode4);
+                } else if (value.length > 1) {
+                  FocusScope.of(context).requestFocus(focusNode4);
+                  tf4.text = value[1];
+                } else if (value == "") {
+                  focusNode3.unfocus();
+                  FocusScope.of(context).requestFocus(focusNode2);
+                }
+              },
+            ),
+          ),
+          Container(
+            width: 60,
+            height: 60,
+            child: TextField(
+              controller: tf4,
+              focusNode: focusNode4,
+              style: const TextStyle(fontSize: 20),
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintStyle: const TextStyle(fontSize: 16),
+                focusColor: Constants.blackColor,
+                border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide(
-                    color: Constants.blackColor,
-                  )),
-              filled: true,
-              contentPadding: const EdgeInsets.all(16),
-              fillColor: Constants.whiteColor,
+                      width: 0,
+                      color: themeController.isDarkMode.value
+                          ? Constants.whiteColor
+                          : Constants.blackColor),
+                ),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(
+                      color: themeController.isDarkMode.value
+                          ? Constants.whiteColor
+                          : Constants.blackColor,
+                    )),
+                filled: true,
+                contentPadding: const EdgeInsets.all(16),
+                fillColor: themeController.isDarkMode.value
+                    ? Constants.blackColor
+                    : Constants.whiteColor,
+              ),
+              onChanged: (String value) {
+                if (value.length == 1) {
+                  focusNode4.unfocus();
+                  // FocusScope.of(context).requestFocus(focusNode2);
+                } else if (value.length > 1) {
+                  tf4.text = value[1];
+                } else if (value == "") {
+                  focusNode4.unfocus();
+                  FocusScope.of(context).requestFocus(focusNode3);
+                }
+              },
             ),
-            onChanged: (String value) {
-              if (value.length == 1) {
-                focusNode4.unfocus();
-                // FocusScope.of(context).requestFocus(focusNode2);
-              } else if (value.length > 1) {
-                tf4.text = value[0];
-              }
-            },
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

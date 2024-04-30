@@ -1,10 +1,16 @@
+/* 
+Written by: Adarsh Patel
+Modified At: 22-04-24
+Description: Following file has the design of 
+forget password page.
+*/
+
 import 'package:flutter/material.dart';
 import 'package:fluxstore/Routes/app_routes.dart';
 import 'package:fluxstore/constants.dart';
-import 'package:fluxstore/controller/login_controller.dart';
+import 'package:fluxstore/controller/theme_controller.dart';
 import 'package:get/get.dart';
 
-// ignore: must_be_immutable
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({super.key});
 
@@ -15,19 +21,21 @@ class ForgetPassword extends StatefulWidget {
 class _ForgetPasswordState extends State<ForgetPassword> {
   late List<Widget> columnData = [];
   TextEditingController email = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  ThemeController themeController = Get.find<ThemeController>();
 
   @override
-  void initState() {
-    super.initState();
-    initList(context);
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    initList();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: ListView(children: [
-          SizedBox(
+        child: SingleChildScrollView(
+          child: SizedBox(
             height: MediaQuery.of(context).size.height - 30,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -37,12 +45,12 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               ),
             ),
           ),
-        ]),
+        ),
       ),
     );
   }
 
-  void initList(context) {
+  void initList() {
     columnData = [
       const SizedBox(
         height: 10,
@@ -54,13 +62,17 @@ class _ForgetPasswordState extends State<ForgetPassword> {
         child: Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-          color: Constants.whiteColor,
+          color: themeController.isDarkMode.value
+              ? Constants.blackColor
+              : Constants.whiteColor,
           child: SizedBox(
             height: 40,
             width: 40,
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: Constants.backIconColor,
+              color: themeController.isDarkMode.value
+                  ? Constants.whiteColor
+                  : Constants.blackColor,
               size: 15,
             ),
           ),
@@ -86,40 +98,81 @@ class _ForgetPasswordState extends State<ForgetPassword> {
       SizedBox(
         height: MediaQuery.of(context).size.height / 12,
       ),
-      TextField(
-        controller: email,
-        decoration: const InputDecoration(
-            hintText: "enter your email here",
-            icon: Icon(Icons.email_outlined)),
-      ),
+      Form(
+          key: _formKey,
+          child: Obx(
+            () => TextFormField(
+              controller: email,
+              validator: (value) {
+                if (value == null || value == "") {
+                  return "This field is required";
+                }
+                if (!RegExp(
+                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                    .hasMatch(value)) {
+                  return "Invalid Email Format, Pls Retry";
+                }
+                return null;
+              },
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                  hintText: "enter your email here",
+                  hintStyle: TextStyle(
+                      color: themeController.isDarkMode.value
+                          ? Constants.whiteColor
+                          : Constants.blackColor,
+                      fontWeight: FontWeight.w100),
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Constants.signupInputBorderColor, width: 1),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Constants.signupInputBorderColor, width: 1),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Constants.focusedSignupInputBorderColor,
+                          width: 1)),
+                  prefixIcon: const Icon(
+                    Icons.email_outlined,
+                    color: Color(0xffBFBFBF),
+                    size: 16,
+                  )),
+            ),
+          )),
       Expanded(child: Container()),
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 15),
         child: Center(
           child: ElevatedButton(
             onPressed: () {
-              if (email.text.isNotEmpty &&
-                  LoginController().validateEmail(email.text)) {
+              if (_formKey.currentState!.validate()) {
                 Get.toNamed(AppRoute.verification);
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Please enter email")));
               }
             },
             style: ElevatedButton.styleFrom(
-                backgroundColor: Constants.buttonBrownColor,
+                backgroundColor: themeController.isDarkMode.value
+                    ? Constants.whiteColor
+                    : Constants.buttonBrownColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.elliptical(
                         Constants.buttonBorderRadius,
                         Constants.buttonBorderRadius)),
-                    side: BorderSide(color: Constants.whiteColor, width: 2))),
+                    side: BorderSide(
+                        color: themeController.isDarkMode.value
+                            ? Constants.whiteColor
+                            : Constants.buttonBrownColor,
+                        width: 2))),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
               child: Text(
                 "Send Email",
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
-                    color: Constants.whiteColor,
+                    color: themeController.isDarkMode.value
+                        ? Constants.blackColor
+                        : Constants.whiteColor,
                     fontSize: 18),
               ),
             ),
